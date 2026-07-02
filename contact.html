@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Arcona Yachts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,200;0,300;0,400;0,500;0,600;1,200;1,300&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0D1C3A; --navy-mid: #132030; --navy-light: #1E3D5C;
+    --white: #F6F5F1; --warm-white: #EDECE8; --gray-light: #D6D4CF;
+    --gray-mid: #8F8D89; --gray-dark: #484644; --accent: #D4874A;
+    --font-headline: 'Jost', sans-serif; --font-body: 'IBM Plex Sans', sans-serif; --font-mono: 'DM Mono', monospace;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-body); background: var(--white); color: var(--navy); overflow-x: hidden; cursor: none; }
+
+  .cursor { position: fixed; width: 8px; height: 8px; background: var(--navy); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); }
+  .cursor-ring { position: fixed; width: 36px; height: 36px; border: 1px solid var(--navy); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); opacity: 0.4; transition: width 0.2s, height 0.2s, opacity 0.2s; }
+  .cursor-ring.expand { width: 52px; height: 52px; opacity: 0.15; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 20px 48px; background: rgba(13,28,58,0.97); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(246,245,241,0.07); }
+  .nav-logo { color: var(--white); text-decoration: none; opacity: 0.85; transition: opacity 0.2s; display: flex; align-items: center; }
+  .nav-logo:hover { opacity: 1; }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { font-family: var(--font-body); font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(246,245,241,0.5); text-decoration: none; transition: color 0.2s; position: relative; }
+  .nav-links a::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 1px; background: var(--accent); transition: width 0.25s; }
+  .nav-links a:hover { color: var(--white); }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-links a.active { color: var(--white); }
+  .nav-links a.active::after { width: 100%; background: var(--accent); }
+  .nav-cta { font-family: var(--font-body); font-size: 10px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--white); border: 1px solid rgba(246,245,241,0.25); padding: 9px 20px; text-decoration: none; transition: all 0.2s; }
+  .nav-cta:hover { background: var(--accent); border-color: var(--accent); }
+
+  /* PAGE HEADER */
+  .page-header { padding: 160px 48px 100px; background: var(--navy); position: relative; overflow: hidden; }
+  .page-header::before { content: 'CONTACT'; position: absolute; right: -20px; top: 50%; transform: translateY(-50%); font-family: var(--font-headline); font-weight: 700; font-size: 200px; color: rgba(246,245,241,0.03); letter-spacing: 0.05em; line-height: 1; pointer-events: none; }
+  .page-header-inner { max-width: 1344px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: flex-end; }
+  .page-tag { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+  .page-tag::before { content: ''; width: 24px; height: 1px; background: var(--accent); }
+  .page-title { font-family: var(--font-headline); font-weight: 500; font-size: clamp(48px, 6vw, 88px); line-height: 0.96; letter-spacing: 0.04em; text-transform: uppercase; color: var(--white); }
+  .page-title strong { font-weight: 600; display: block; }
+  .page-intro { font-family: var(--font-body); font-size: 15px; font-weight: 300; line-height: 1.85; color: rgba(246,245,241,0.55); align-self: flex-end; }
+
+  /* TEAM GRID */
+  .team-section { padding: 100px 48px; max-width: 1344px; margin: 0 auto; }
+  .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 64px; }
+  .team-grid-row2 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 2px; }
+
+  .team-card { padding: 48px 40px 52px; background: var(--warm-white); border-bottom: 3px solid transparent; transition: border-color 0.25s, background 0.2s; position: relative; overflow: hidden; }
+  .team-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: transparent; transition: background 0.3s; }
+  .team-card:hover::before { background: var(--accent); }
+  .team-card:hover { background: var(--gray-light); }
+
+  .team-monogram { width: 80px; height: 80px; border-radius: 50%; background: var(--navy); overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; font-family: var(--font-headline); font-weight: 100; font-size: 68px; color: var(--white); line-height: 1; letter-spacing: -4px; flex-shrink: 0; }
+
+  .team-name { font-family: var(--font-headline); font-weight: 500; font-size: 22px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--navy); line-height: 1.1; margin-bottom: 8px; }
+  .team-title { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 32px; }
+
+  .team-contact { display: flex; flex-direction: column; gap: 10px; }
+  .team-contact a { font-family: var(--font-body); font-size: 13px; font-weight: 300; color: var(--gray-dark); text-decoration: none; transition: color 0.2s; display: flex; align-items: center; gap: 10px; }
+  .team-contact a:hover { color: var(--navy); }
+  .team-contact-label { font-family: var(--font-mono); font-size: 8px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gray-mid); display: block; margin-bottom: 2px; }
+
+  /* OFFICE */
+  .office-section { background: var(--navy); padding: 100px 48px; }
+  .office-inner { max-width: 1344px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+
+  .office-headline { font-family: var(--font-headline); font-weight: 500; font-size: clamp(32px, 3.5vw, 48px); letter-spacing: 0.04em; text-transform: uppercase; color: var(--white); line-height: 1; margin-bottom: 40px; }
+  .office-headline em { font-style: normal; color: var(--accent); }
+
+  .office-detail { margin-bottom: 32px; }
+  .office-detail-label { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+  .office-detail-value { font-family: var(--font-body); font-size: 14px; font-weight: 300; color: rgba(246,245,241,0.65); line-height: 1.7; }
+  .office-detail-value a { color: rgba(246,245,241,0.65); text-decoration: none; transition: color 0.2s; }
+  .office-detail-value a:hover { color: var(--white); }
+
+  .office-image { aspect-ratio: 4/3; overflow: hidden; background: var(--navy-mid); }
+  .office-image img { width: 100%; height: 100%; object-fit: cover; filter: saturate(0.8) brightness(0.9); }
+
+  /* FOOTER */
+  .footer-minimal { background: var(--navy); border-top: 1px solid rgba(246,245,241,0.06); padding: 28px 48px; display: flex; justify-content: space-between; align-items: center; }
+  .footer-minimal-logo { color: var(--white); opacity: 0.5; }
+  .footer-minimal-links { display: flex; gap: 24px; }
+  .footer-minimal-links a { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(246,245,241,0.25); text-decoration: none; transition: color 0.2s; }
+  .footer-minimal-links a:hover { color: rgba(246,245,241,0.6); }
+
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo" aria-label="Arcona Yachts">
+    <svg width="40" height="40" viewBox="0 0 283.46 283.46" fill="none"><path fill="currentColor" d="M71.43,164.1c-.53.03-.78.24-1.07.63l-2.72,3.74c-1.48,1.82-2.75,2.68-3.54,2.72h-30.96c-1.12,0-1.42-.93-1.31-1.14,14.32-26.54,60.72-66.64,109.86-65.77h.03s0,0,0,0h0c.09,0,.16,0,.17,0,49.75-.87,95.95,39.7,109.58,65.35.11.2.55,1.56-.46,1.56h-31.63c-.79-.05-2.35-1.14-4.02-3.49l-2.15-2.98c-.28-.38-.69-.59-1.21-.61H71.43ZM141.51,117.66c-22.43.46-50.82,15.61-64.28,37.04-.46.65.11.73.69.69h128.35c.58.04-.15-1.12-.15-1.12-11.76-19.02-39.26-35.51-64.53-36.62h-.08Z"/></svg>
+  </a>
+  <ul class="nav-links">
+    <li><a href="yachts.html">Yachts</a></li>
+    <li><a href="events.html">Events</a></li>
+    <li><a href="brokerage.html">Brokerage</a></li>
+    <li><a href="#">News</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="service.html">Service</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Contact</a>
+</nav>
+
+<!-- PAGE HEADER -->
+<section class="page-header">
+  <div class="page-header-inner">
+    <div>
+      <div class="page-tag">Get in Touch</div>
+      <h1 class="page-title">The<br><strong>Team</strong></h1>
+    </div>
+    <p class="page-intro">We sell directly. No dealer network, no middlemen — just the people who build and sail Arcona yachts. Reach out to us directly and we will get back to you.</p>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="team-section">
+  <div class="team-grid">
+
+    <div class="team-card reveal">
+      <div class="team-monogram">FM</div>
+      <div class="team-name">Fredrik Malmqvist</div>
+      <div class="team-title">Executive Chairman</div>
+      <div class="team-contact">
+        <div>
+          <span class="team-contact-label">Email</span>
+          <a href="mailto:fredrik.malmqvist@arconayachts.se">fredrik.malmqvist@arconayachts.se</a>
+        </div>
+        <div>
+          <span class="team-contact-label">Phone</span>
+          <a href="tel:+46721459464">+46 72 145 94 64</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="team-card reveal reveal-delay-1">
+      <div class="team-monogram">HR</div>
+      <div class="team-name">Hasse Rutgersson</div>
+      <div class="team-title">Technical Director & Head of Sales</div>
+      <div class="team-contact">
+        <div>
+          <span class="team-contact-label">Email</span>
+          <a href="mailto:hasse.rutgersson@arconayachts.se">hasse.rutgersson@arconayachts.se</a>
+        </div>
+        <div>
+          <span class="team-contact-label">Phone</span>
+          <a href="tel:+46706894860">+46 70 689 48 60</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="team-card reveal reveal-delay-2">
+      <div class="team-monogram">HH</div>
+      <div class="team-name">Hanna Hellberg</div>
+      <div class="team-title">Marketing Manager</div>
+      <div class="team-contact">
+        <div>
+          <span class="team-contact-label">Email</span>
+          <a href="mailto:hanna@arconayachts.se">hanna@arconayachts.se</a>
+        </div>
+        <div>
+          <span class="team-contact-label">Phone</span>
+          <a href="tel:+46733643945">+46 733 643 945</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="team-grid team-grid-row2">
+
+    <div class="team-card reveal">
+      <div class="team-monogram">ST</div>
+      <div class="team-name">Sofia Thörnqvist</div>
+      <div class="team-title">Finance & Administration</div>
+      <div class="team-contact">
+        <div>
+          <span class="team-contact-label">Email</span>
+          <a href="mailto:finance@arconayachts.se">finance@arconayachts.se</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="team-card reveal reveal-delay-1">
+      <div class="team-monogram">DC</div>
+      <div class="team-name">Damien Chevalier</div>
+      <div class="team-title">Sales & Support</div>
+      <div class="team-contact">
+        <div>
+          <span class="team-contact-label">Email</span>
+          <a href="mailto:damien.chevalier@arconayachts.se">damien.chevalier@arconayachts.se</a>
+        </div>
+        <div>
+          <span class="team-contact-label">Phone</span>
+          <a href="tel:+33698834239">+33 6 98 83 42 39</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="team-card" style="background:transparent;"></div>
+
+  </div>
+
+</section>
+
+<!-- OFFICE -->
+<section class="office-section">
+  <div class="office-inner">
+    <div class="reveal">
+      <h2 class="office-headline">Find<br>us in <em>Henån</em></h2>
+      <div class="office-detail">
+        <div class="office-detail-label">Address</div>
+        <div class="office-detail-value">Varvsvägen 1<br>SE-473 31 Henån<br>Sweden</div>
+      </div>
+      <div class="office-detail">
+        <div class="office-detail-label">Part of</div>
+        <div class="office-detail-value"><a href="https://www.najadgroup.se" target="_blank" style="color:rgba(246,245,241,0.65);text-decoration:none;transition:color 0.2s;">Najad Group AB</a><br>alongside Najad Yachts</div>
+      </div>
+      <div class="office-detail">
+        <div class="office-detail-label">Follow</div>
+        <div class="office-detail-value">
+          <a href="#">Instagram</a> &nbsp;·&nbsp;
+          <a href="#">Facebook</a> &nbsp;·&nbsp;
+          <a href="#">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+    <div class="office-image reveal reveal-delay-1">
+      <img src="images/about/arcona-50-drone-17-web.jpg" alt="Arcona 50 at sea">
+    </div>
+  </div>
+</section>
+
+<footer class="footer-minimal">
+  <a href="index.html" class="footer-minimal-logo" aria-label="Arcona Yachts">
+    <svg width="32" height="32" viewBox="0 0 283.46 283.46" fill="none"><path fill="currentColor" d="M71.43,164.1c-.53.03-.78.24-1.07.63l-2.72,3.74c-1.48,1.82-2.75,2.68-3.54,2.72h-30.96c-1.12,0-1.42-.93-1.31-1.14,14.32-26.54,60.72-66.64,109.86-65.77h.03s0,0,0,0h0c.09,0,.16,0,.17,0,49.75-.87,95.95,39.7,109.58,65.35.11.2.55,1.56-.46,1.56h-31.63c-.79-.05-2.35-1.14-4.02-3.49l-2.15-2.98c-.28-.38-.69-.59-1.21-.61H71.43ZM141.51,117.66c-22.43.46-50.82,15.61-64.28,37.04-.46.65.11.73.69.69h128.35c.58.04-.15-1.12-.15-1.12-11.76-19.02-39.26-35.51-64.53-36.62h-.08Z"/></svg>
+  </a>
+  <div class="footer-minimal-links">
+    <a href="#">Privacy</a>
+    <a href="#">Cookie Policy</a>
+    <a href="#">© 2026 Arcona Yachts AB</a> &nbsp;·&nbsp; <a href="https://www.najadgroup.se" target="_blank">Najad Group</a>
+  </div>
+</footer>
+
+<script>
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx + 'px'; cursor.style.top = my + 'px'; });
+  function animateRing() { rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12; ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; requestAnimationFrame(animateRing); }
+  animateRing();
+  document.querySelectorAll('a, button').forEach(el => { el.addEventListener('mouseenter', () => ring.classList.add('expand')); el.addEventListener('mouseleave', () => ring.classList.remove('expand')); });
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

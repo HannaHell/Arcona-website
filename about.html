@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Arcona — Swedish Craftsmanship Built for Performance</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,200;0,300;0,400;0,500;0,600;1,200;1,300&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0D1C3A; --navy-mid: #132030; --navy-light: #1E3D5C;
+    --white: #F6F5F1; --warm-white: #EDECE8; --gray-light: #D6D4CF;
+    --gray-mid: #8F8D89; --gray-dark: #484644; --accent: #D4874A;
+    --font-headline: 'Jost', sans-serif; --font-body: 'IBM Plex Sans', sans-serif; --font-mono: 'DM Mono', monospace;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-body); background: var(--white); color: var(--navy); overflow-x: hidden; cursor: none; }
+
+  .cursor { position: fixed; width: 8px; height: 8px; background: var(--navy); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: transform 0.1s; }
+  .cursor-ring { position: fixed; width: 36px; height: 36px; border: 1px solid var(--navy); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); opacity: 0.4; transition: width 0.2s, height 0.2s, opacity 0.2s; }
+  .cursor-ring.expand { width: 52px; height: 52px; opacity: 0.15; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 20px 48px; background: rgba(13,28,58,0.97); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(246,245,241,0.07); }
+  .nav-logo { color: var(--white); text-decoration: none; opacity: 0.85; transition: opacity 0.2s; display: flex; align-items: center; }
+  .nav-logo:hover { opacity: 1; }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { font-family: var(--font-body); font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(246,245,241,0.5); text-decoration: none; transition: color 0.2s; position: relative; }
+  .nav-links a::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 1px; background: var(--accent); transition: width 0.25s; }
+  .nav-links a:hover { color: var(--white); }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-links a.active { color: var(--white); }
+  .nav-links a.active::after { width: 100%; background: var(--accent); }
+  .nav-cta { font-family: var(--font-body); font-size: 10px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--white); border: 1px solid rgba(246,245,241,0.25); padding: 9px 20px; text-decoration: none; transition: all 0.2s; }
+  .nav-cta:hover { background: var(--accent); border-color: var(--accent); }
+
+  /* HERO */
+  .hero { height: 80vh; min-height: 580px; position: relative; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; background: var(--navy); }
+  .hero-bg { position: absolute; inset: 0; background: linear-gradient(175deg, rgba(13,28,58,0.2) 0%, rgba(13,28,58,0.75) 70%, rgba(13,28,58,0.97) 100%), url('images/about/Arcona-435-6795-edited.jpg') center/cover no-repeat; animation: slowzoom 16s ease-out forwards; }
+  @keyframes slowzoom { from { transform: scale(1.03); } to { transform: scale(1.0); } }
+  .hero-content { position: relative; z-index: 2; padding: 0 48px 72px; max-width: 900px; }
+  .hero-eyebrow { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; display: flex; align-items: center; gap: 12px; opacity: 0; animation: fadeup 0.7s 0.3s ease forwards; }
+  .hero-eyebrow::before { content: ''; width: 24px; height: 1px; background: var(--accent); }
+  .hero-title { font-family: var(--font-headline); font-weight: 200; font-size: clamp(48px, 6.5vw, 92px); line-height: 0.96; color: var(--white); letter-spacing: 0.06em; text-transform: uppercase; opacity: 0; animation: fadeup 0.8s 0.5s ease forwards; }
+  .hero-title strong { font-weight: 600; display: block; }
+  .hero-subtitle { margin-top: 24px; font-family: var(--font-body); font-size: 16px; font-weight: 300; line-height: 1.75; color: rgba(246,245,241,0.6); max-width: 560px; opacity: 0; animation: fadeup 0.7s 0.7s ease forwards; }
+  @keyframes fadeup { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* SECTION BASICS */
+  .section-tag { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gray-mid); margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+  .section-tag::before { content: ''; width: 24px; height: 1px; background: var(--accent); }
+  .section-tag-light { color: rgba(246,245,241,0.3); }
+  .section-tag-light::before { background: var(--accent); }
+
+  /* STORY — CRAFTSMANSHIP */
+  .story-section { padding: 120px 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; max-width: 1440px; margin: 0 auto; }
+  .story-headline { font-family: var(--font-headline); font-weight: 500; font-size: clamp(36px, 3.8vw, 54px); line-height: 1.06; letter-spacing: 0.04em; text-transform: uppercase; color: var(--navy); margin-bottom: 32px; }
+  .story-headline em { font-style: normal; color: var(--accent); }
+  .story-body { font-size: 15px; font-weight: 300; line-height: 1.9; color: var(--gray-dark); }
+  .story-body p + p { margin-top: 20px; }
+
+  /* FULL WIDTH IMAGE */
+  .full-img { width: 100%; aspect-ratio: 21/8; overflow: hidden; position: relative; }
+  .full-img-bg { width: 100%; height: 100%; background-size: cover; background-position: center; filter: saturate(0.85); transition: filter 0.4s; }
+  .full-img:hover .full-img-bg { filter: saturate(1); }
+
+  /* DNA SECTION — dark */
+  .dna-section { background: var(--navy); padding: 120px 48px; }
+  .dna-inner { max-width: 1344px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+  .dna-headline { font-family: var(--font-headline); font-weight: 500; font-size: clamp(36px, 3.8vw, 54px); line-height: 1.06; letter-spacing: 0.04em; text-transform: uppercase; color: var(--white); margin-bottom: 32px; }
+  .dna-headline em { font-style: normal; color: var(--accent); }
+  .dna-body { font-size: 15px; font-weight: 300; line-height: 1.9; color: rgba(246,245,241,0.6); }
+  .dna-body p + p { margin-top: 20px; }
+  .dna-pull { font-family: var(--font-headline); font-weight: 300; font-style: italic; font-size: clamp(22px, 2.5vw, 32px); line-height: 1.35; color: var(--white); border-left: 3px solid var(--accent); padding-left: 28px; margin-bottom: 40px; }
+
+  /* DETAILS SECTION */
+  .details-section { padding: 120px 48px; max-width: 1440px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .details-img { aspect-ratio: 4/3; overflow: hidden; }
+  .details-img img { width: 100%; height: 100%; object-fit: cover; filter: saturate(0.85); transition: filter 0.5s, transform 0.6s; }
+  .details-img:hover img { filter: saturate(1); transform: scale(1.03); }
+  .details-headline { font-family: var(--font-headline); font-weight: 500; font-size: clamp(32px, 3.2vw, 46px); line-height: 1.08; letter-spacing: 0.04em; text-transform: uppercase; color: var(--navy); margin-bottom: 28px; }
+  .details-headline em { font-style: normal; color: var(--accent); }
+  .details-body { font-size: 15px; font-weight: 300; line-height: 1.9; color: var(--gray-dark); }
+  .details-body p + p { margin-top: 18px; }
+
+  /* SUPPLIERS */
+  .suppliers-section { background: var(--warm-white); padding: 80px 48px; border-top: 1px solid var(--gray-light); }
+  .suppliers-inner { max-width: 900px; margin: 0 auto; text-align: center; }
+  .suppliers-headline { font-family: var(--font-headline); font-weight: 500; font-size: 36px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--navy); margin-bottom: 28px; }
+  .suppliers-body { font-size: 15px; font-weight: 300; line-height: 1.85; color: var(--gray-dark); max-width: 680px; margin: 0 auto; }
+
+  /* NUMBERS */
+  .numbers-section { background: var(--navy); padding: 80px 48px; }
+  .numbers-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; max-width: 1200px; margin: 0 auto; border: 1px solid rgba(246,245,241,0.07); }
+  .number-item { padding: 40px 32px; border-right: 1px solid rgba(246,245,241,0.07); position: relative; }
+  .number-item:last-child { border-right: none; }
+  .number-item::before { content: ''; position: absolute; top: 0; left: 32px; right: 32px; height: 2px; background: transparent; transition: background 0.3s; }
+  .number-item:hover::before { background: var(--accent); }
+  .number-val { font-family: var(--font-headline); font-weight: 500; font-size: 52px; color: var(--white); letter-spacing: 0.02em; line-height: 1; }
+  .number-unit { font-size: 22px; color: var(--accent); font-weight: 300; }
+  .number-label { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(246,245,241,0.35); margin-top: 10px; }
+
+  /* CTA */
+  .cta-section { padding: 100px 48px; display: flex; align-items: center; justify-content: space-between; gap: 40px; max-width: 1344px; margin: 0 auto; }
+  .cta-headline { font-family: var(--font-headline); font-weight: 500; font-size: clamp(32px, 3.5vw, 50px); letter-spacing: 0.04em; text-transform: uppercase; color: var(--navy); line-height: 1.08; }
+  .cta-headline em { font-style: normal; color: var(--accent); }
+  .cta-actions { display: flex; gap: 12px; flex-shrink: 0; }
+  .btn-primary { font-family: var(--font-body); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--white); background: var(--navy); border: 1px solid var(--navy); padding: 13px 28px; text-decoration: none; transition: all 0.25s; display: inline-flex; align-items: center; gap: 10px; }
+  .btn-primary:hover { background: var(--accent); border-color: var(--accent); }
+  .btn-primary svg { transition: transform 0.2s; }
+  .btn-primary:hover svg { transform: translateX(4px); }
+  .btn-ghost { font-family: var(--font-body); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gray-dark); border: 1px solid var(--gray-light); padding: 13px 28px; text-decoration: none; transition: all 0.25s; }
+  .btn-ghost:hover { border-color: var(--navy); color: var(--navy); }
+
+  /* FOOTER */
+  .footer-minimal { background: var(--navy); border-top: 1px solid rgba(246,245,241,0.06); padding: 28px 48px; display: flex; justify-content: space-between; align-items: center; }
+  .footer-minimal-logo { color: var(--white); opacity: 0.5; }
+  .footer-minimal-links { display: flex; gap: 24px; }
+  .footer-minimal-links a { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(246,245,241,0.25); text-decoration: none; transition: color 0.2s; }
+  .footer-minimal-links a:hover { color: rgba(246,245,241,0.6); }
+
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.15s; }
+  .reveal-delay-2 { transition-delay: 0.3s; }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo" aria-label="Arcona Yachts">
+    <svg width="40" height="40" viewBox="0 0 283.46 283.46" fill="none"><path fill="currentColor" d="M71.43,164.1c-.53.03-.78.24-1.07.63l-2.72,3.74c-1.48,1.82-2.75,2.68-3.54,2.72h-30.96c-1.12,0-1.42-.93-1.31-1.14,14.32-26.54,60.72-66.64,109.86-65.77h.03s0,0,0,0h0c.09,0,.16,0,.17,0,49.75-.87,95.95,39.7,109.58,65.35.11.2.55,1.56-.46,1.56h-31.63c-.79-.05-2.35-1.14-4.02-3.49l-2.15-2.98c-.28-.38-.69-.59-1.21-.61H71.43ZM141.51,117.66c-22.43.46-50.82,15.61-64.28,37.04-.46.65.11.73.69.69h128.35c.58.04-.15-1.12-.15-1.12-11.76-19.02-39.26-35.51-64.53-36.62h-.08Z"/></svg>
+  </a>
+  <ul class="nav-links">
+    <li><a href="yachts.html">Yachts</a></li>
+    <li><a href="events.html">Events</a></li>
+    <li><a href="brokerage.html">Brokerage</a></li>
+    <li><a href="#">News</a></li>
+    <li><a href="about.html" class="active">About</a></li>
+    <li><a href="service.html">Service</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Contact</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Henån, Sweden — Since 1982</div>
+    <h1 class="hero-title">Swedish<br><strong>Craftsmanship.</strong></h1>
+    <p class="hero-subtitle">Built for performance. Shaped by sailors. Every Arcona is the product of a belief that has guided the yard since the very beginning.</p>
+  </div>
+</section>
+
+<!-- CRAFTSMANSHIP / BRAND STORY -->
+<section class="story-section">
+  <div class="reveal">
+    <div class="section-tag">Our Story</div>
+    <h2 class="story-headline">Built for<br>performance,<br><em>shaped by sailors.</em></h2>
+  </div>
+  <div class="reveal reveal-delay-1">
+    <div class="story-body">
+      <p>Arcona's roots lie in Swedish boatbuilding, beginning as a small family yard in the Stockholm archipelago in the late 1960s. From the very beginning, Arcona has been about more than building yachts — it has been about sharing a way of sailing. Owners, sailors and builders have always been closely connected, united by a belief in performance, balance and long-term quality.</p>
+      <p>That philosophy took form in 1982 with the Arcona 32, defining the Arcona approach: a racer's heart paired with a cruiser's comfort. A long-standing collaboration with designer Stefan Qviberg shaped the brand's distinctive balance and sailing feel, supported by Arcona's signature galvanised steel frame, known for its strength, stiffness and confidence under sail.</p>
+      <p>Through the 2000s, models such as the Arcona 400 established the modern Arcona look, while advanced construction methods reduced weight and increased strength. International recognition followed, including European Yacht of the Year for the Arcona 430 in 2009 — an achievement shared not only by the yard, but by the growing community of Arcona owners sailing their yachts across the world.</p>
+      <p>Since 2018, Arcona has been part of <a href="https://www.najadgroup.se" target="_blank" style="color:var(--accent);text-decoration:none;">Najad Group</a>, retaining its clear focus on performance-driven design. This continued evolution has led to further accolades, including European Yacht of the Year for both the Arcona 435 and the Arcona 50 — the latter marking Arcona's entry into the super-premium segment.</p>
+      <p>Today, choosing an Arcona is not simply about owning a yacht. It is about becoming part of a long-standing family of sailors — people who value craftsmanship, sailing performance, and the quiet confidence that comes from a boat built by those who truly sail themselves.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FULL WIDTH IMAGE -->
+<div class="full-img reveal">
+  <div class="full-img-bg" style="background-image: url('images/about/Arcona_385_Trygg_Arcona_Jungfru_Apr_21_057_w%20-%20Copy.jpg');"></div>
+</div>
+
+<!-- DNA — dark section -->
+<section class="dna-section">
+  <div class="dna-inner">
+    <div class="reveal">
+      <div class="section-tag section-tag-light">Design Philosophy</div>
+      <h2 class="dna-headline">The<br>Arcona<br><em>DNA</em></h2>
+    </div>
+    <div class="reveal reveal-delay-1">
+      <p class="dna-pull">"There is a particular moment when an Arcona comes alive and accelerates with balance and precision. The sensation is immediate, and it's a feeling shaped by experience."</p>
+      <div class="dna-body">
+        <p>Arcona is a yacht built by sailors: we notice when the reach to a control line is just a little too far, when a foothold could be better placed, or when something could be made simpler. These insights are distilled into all design decisions, resulting in yachts that feel intuitive, composed, and purpose-built.</p>
+        <p>At the heart of our philosophy is the performance cruiser: a yacht that is fast and efficient yet remains comfortable and safe for family cruising. Achieving this balance is the real challenge, and the foundation of every Arcona design.</p>
+        <p>Weight is key. A lighter yacht is faster and more responsive, while allowing capacity for cruising equipment without compromise. Combined with carefully considered cockpit layouts, every Arcona is designed to be confidently sailed shorthanded in any conditions.</p>
+        <p>All Arcona models are modern boats, with efficient sail plans — tall, powerful and easily managed — unmistakably Arcona at sea.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IN THE DETAILS -->
+<section class="details-section">
+  <div class="details-img reveal">
+    <img src="images/about/arcona-50-drone-17-web.jpg" alt="Arcona 50 at sea">
+  </div>
+  <div class="reveal reveal-delay-1">
+    <div class="section-tag">Swedish Quality</div>
+    <h2 class="details-headline">In the<br><em>Details</em></h2>
+    <div class="details-body">
+      <p>Building a yacht involves thousands of decisions, each one influencing how the boat feels, sails and endures over time. At Arcona, every choice is guided by a single question: does this meet our standards?</p>
+      <p>The hull is built to be stiff, strong and safe, forming the backbone of a yacht designed for long-term ownership and confident sailing. Swedish craftsmanship and design runs through the build, the structure and the clean, purposeful lines of every Arcona.</p>
+      <p>Our yachts are airy, functional and carefully detailed, with qualities that reveal themselves gradually, over years of use. These are boats built to age well, both technically and aesthetically.</p>
+      <p>Quite simply, we build yachts we are proud of, and yachts we believe you will continue to appreciate, season after season.</p>
+    </div>
+  </div>
+</section>
+
+<!-- NUMBERS -->
+<section class="numbers-section">
+  <div class="numbers-grid reveal">
+    <div class="number-item">
+      <div class="number-val">1982<span class="number-unit"></span></div>
+      <div class="number-label">Founded</div>
+    </div>
+    <div class="number-item">
+      <div class="number-val">2<span class="number-unit">×</span></div>
+      <div class="number-label">European Yacht of the Year</div>
+    </div>
+    <div class="number-item">
+      <div class="number-val">6<span class="number-unit"></span></div>
+      <div class="number-label">Models in Current Range</div>
+    </div>
+    <div class="number-item">
+      <div class="number-val">40<span class="number-unit">+</span></div>
+      <div class="number-label">Years of Boatbuilding</div>
+    </div>
+  </div>
+</section>
+
+<!-- SUPPLIERS -->
+<section class="suppliers-section">
+  <div class="suppliers-inner reveal">
+    <div class="section-tag" style="justify-content:center;">Our Partners</div>
+    <h2 class="suppliers-headline">No Shortcuts</h2>
+    <p class="suppliers-body">Another essential piece of the puzzle for Arcona Yachts is to install good quality gear. We choose companies that care as much about their products as we do about our yachts. We take no shortcuts and all our partners are carefully selected. With a long history as boat builders, the partnership with our suppliers is a relationship that has grown and developed as the company has evolved. The brands we work with today are the best in the industry regarding quality, guarantees and customer support.</p>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2 class="cta-headline reveal">Ready to find<br>your <em>Arcona?</em></h2>
+  <div class="cta-actions reveal reveal-delay-1">
+    <a href="yachts.html" class="btn-primary">
+      View the Range
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+    <a href="contact.html" class="btn-ghost">Get in Touch</a>
+  </div>
+</section>
+
+<footer class="footer-minimal">
+  <a href="index.html" class="footer-minimal-logo" aria-label="Arcona Yachts">
+    <svg width="32" height="32" viewBox="0 0 283.46 283.46" fill="none"><path fill="currentColor" d="M71.43,164.1c-.53.03-.78.24-1.07.63l-2.72,3.74c-1.48,1.82-2.75,2.68-3.54,2.72h-30.96c-1.12,0-1.42-.93-1.31-1.14,14.32-26.54,60.72-66.64,109.86-65.77h.03s0,0,0,0h0c.09,0,.16,0,.17,0,49.75-.87,95.95,39.7,109.58,65.35.11.2.55,1.56-.46,1.56h-31.63c-.79-.05-2.35-1.14-4.02-3.49l-2.15-2.98c-.28-.38-.69-.59-1.21-.61H71.43ZM141.51,117.66c-22.43.46-50.82,15.61-64.28,37.04-.46.65.11.73.69.69h128.35c.58.04-.15-1.12-.15-1.12-11.76-19.02-39.26-35.51-64.53-36.62h-.08Z"/></svg>
+  </a>
+  <div class="footer-minimal-links">
+    <a href="#">Privacy</a>
+    <a href="#">Cookie Policy</a>
+    <a href="#">© 2026 Arcona Yachts AB</a> &nbsp;·&nbsp; <a href="https://www.najadgroup.se" target="_blank">Najad Group</a>
+  </div>
+</footer>
+
+<script>
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx + 'px'; cursor.style.top = my + 'px'; });
+  function animateRing() { rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12; ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; requestAnimationFrame(animateRing); }
+  animateRing();
+  document.querySelectorAll('a, button').forEach(el => { el.addEventListener('mouseenter', () => ring.classList.add('expand')); el.addEventListener('mouseleave', () => ring.classList.remove('expand')); });
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

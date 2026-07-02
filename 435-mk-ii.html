@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arcona 435 Mk II — The Greyhound of the Seas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,200;0,300;0,400;0,500;0,600;1,200;1,300&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0D1C3A; --navy-mid: #132030; --navy-light: #1E3D5C;
+    --white: #F6F5F1; --warm-white: #EDECE8; --gray-light: #D6D4CF;
+    --gray-mid: #8F8D89; --gray-dark: #484644; --accent: #D4874A;
+    --font-headline: 'Jost', sans-serif; --font-body: 'IBM Plex Sans', sans-serif; --font-mono: 'DM Mono', monospace;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-body); background: var(--white); color: var(--navy); overflow-x: hidden; cursor: none; }
+  .cursor { position: fixed; width: 8px; height: 8px; background: var(--navy); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: transform 0.1s; }
+  .cursor-ring { position: fixed; width: 36px; height: 36px; border: 1px solid var(--navy); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); opacity: 0.4; transition: width 0.2s, height 0.2s, opacity 0.2s; }
+  .cursor-ring.expand { width: 52px; height: 52px; opacity: 0.15; }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 20px 48px; background: rgba(13,28,58,0.97); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(246,245,241,0.07); }
+  .nav-logo { color: var(--white); text-decoration: none; opacity: 0.85; transition: opacity 0.2s; display: flex; align-items: center; }
+  .nav-logo:hover { opacity: 1; }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { font-family: var(--font-body); font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(246,245,241,0.5); text-decoration: none; transition: color 0.2s; position: relative; }
+  .nav-links a::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 1px; background: var(--accent); transition: width 0.25s; }
+  .nav-links a:hover { color: var(--white); }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-links a.active { color: var(--white); }
+  .nav-links a.active::after { width: 100%; background: var(--accent); }
+  .nav-cta { font-family: var(--font-body); font-size: 10px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--white); border: 1px solid rgba(246,245,241,0.25); padding: 9px 20px; text-decoration: none; transition: all 0.2s; }
+  .nav-cta:hover { background: var(--accent); border-color: var(--accent); }
+  .breadcrumb { position: fixed; top: 72px; left: 48px; z-index: 90; display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(246,245,241,0.35); opacity: 0; animation: fadeup 0.6s 0.8s ease forwards; }
+  .breadcrumb a { color: inherit; text-decoration: none; transition: color 0.2s; }
+  .breadcrumb a:hover { color: rgba(246,245,241,0.7); }
+  .breadcrumb span { color: var(--accent); }
+  .hero { height: 100vh; min-height: 700px; position: relative; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; background: var(--navy); }
+  .hero-bg { position: absolute; inset: 0; background: linear-gradient(175deg, rgba(13,28,58,0.2) 0%, rgba(13,28,58,0.75) 70%, rgba(13,28,58,0.95) 100%), url('images/435/hero-sunset.jpg') center/cover no-repeat; transform: scale(1.03); animation: slowzoom 14s ease-out forwards; }
+  @keyframes slowzoom { from { transform: scale(1.03); } to { transform: scale(1.0); } }
+  .hero-award { position: absolute; top: 96px; right: 48px; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; opacity: 0; animation: fadeup 0.7s 1.2s ease forwards; }
+  .hero-content { position: relative; z-index: 2; padding: 0 48px 64px; }
+  .hero-model-tag { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; display: flex; align-items: center; gap: 12px; opacity: 0; animation: fadeup 0.7s 0.3s ease forwards; }
+  .hero-model-tag::before { content: ''; width: 28px; height: 1px; background: var(--accent); }
+  .hero-title { font-family: var(--font-headline); font-weight: 200; font-size: clamp(56px, 7.5vw, 108px); line-height: 0.95; color: var(--white); letter-spacing: 0.06em; text-transform: uppercase; opacity: 0; animation: fadeup 0.8s 0.5s ease forwards; }
+  .hero-title strong { font-weight: 600; display: block; line-height: 0.95; letter-spacing: 0.04em; }
+  .hero-title-sub { display: block; font-weight: 200; line-height: 0.95; }
+  .hero-tagline { margin-top: 24px; font-family: var(--font-body); font-style: italic; font-size: 18px; font-weight: 300; color: rgba(246,245,241,0.6); letter-spacing: 0.01em; opacity: 0; animation: fadeup 0.7s 0.7s ease forwards; }
+  .hero-bottom { display: flex; align-items: flex-end; justify-content: space-between; margin-top: 40px; opacity: 0; animation: fadeup 0.7s 0.9s ease forwards; }
+  .hero-quick-specs { display: flex; gap: 32px; }
+  .qs-val { font-family: var(--font-headline); font-weight: 500; font-size: 22px; color: var(--white); letter-spacing: 0.04em; line-height: 1; }
+  .qs-unit { font-size: 13px; color: var(--accent); }
+  .qs-label { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(246,245,241,0.4); margin-top: 4px; }
+  .hero-actions { display: flex; gap: 12px; }
+  .btn-primary { font-family: var(--font-body); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--white); background: var(--accent); border: 1px solid var(--accent); padding: 13px 28px; text-decoration: none; transition: all 0.25s; display: inline-flex; align-items: center; gap: 10px; }
+  .btn-primary:hover { background: #bf7540; border-color: #bf7540; }
+  .btn-primary svg { transition: transform 0.2s; }
+  .btn-primary:hover svg { transform: translateX(4px); }
+  .btn-ghost { font-family: var(--font-body); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(246,245,241,0.65); border: 1px solid rgba(246,245,241,0.2); padding: 13px 28px; text-decoration: none; transition: all 0.25s; }
+  .btn-ghost:hover { border-color: rgba(246,245,241,0.6); color: var(--white); }
+  .scroll-hint { position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 6px; opacity: 0; animation: fadeup 0.6s 1.4s ease forwards; }
+  .scroll-line { width: 1px; height: 36px; background: rgba(246,245,241,0.2); position: relative; overflow: hidden; }
+  .scroll-line::after { content: ''; position: absolute; top: -100%; width: 1px; height: 100%; background: var(--accent); animation: scrolldown 1.8s 2s ease-in-out infinite; }
+  @keyframes scrolldown { 0% { top: -100%; } 100% { top: 100%; } }
+  .scroll-hint-text { font-family: var(--font-mono); font-size: 8px; letter-spacing: 0.2em; color: rgba(246,245,241,0.3); text-transform: uppercase; writing-mode: vertical-lr; }
+  @keyframes fadeup { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+  .model-nav { position: sticky; top: 61px; z-index: 80; background: var(--white); border-bottom: 1px solid var(--gray-light); padding: 0 48px; display: flex; align-items: center; justify-content: space-between; }
+  .model-nav-links { display: flex; gap: 0; list-style: none; }
+  .model-nav-links a { font-family: var(--font-body); font-size: 11px; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray-mid); text-decoration: none; padding: 16px 20px; display: block; border-bottom: 2px solid transparent; transition: color 0.2s, border-color 0.2s; }
+  .model-nav-links a:hover { color: var(--navy); border-bottom-color: var(--gray-light); }
+  .model-nav-links a.active { color: var(--navy); border-bottom-color: var(--accent); }
+  .model-nav-cta { font-family: var(--font-body); font-size: 10px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--white); background: var(--navy); padding: 10px 20px; text-decoration: none; transition: background 0.2s; }
+  .model-nav-cta:hover { background: var(--accent); }
+  .section-tag { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gray-mid); margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+  .section-tag::before { content: ''; width: 24px; height: 1px; background: var(--accent); }
+  .story-section { padding: 120px 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; max-width: 1440px; margin: 0 auto; }
+  .story-headline { font-family: var(--font-headline); font-weight: 500; font-size: clamp(36px, 3.8vw, 54px); line-height: 1.08; letter-spacing: 0.04em; text-transform: uppercase; color: var(--navy); margin-bottom: 32px; }
+  .story-headline em { font-style: normal; color: var(--accent); }
+  .story-body { font-size: 15px; font-weight: 300; line-height: 1.9; color: var(--gray-dark); }
+  .story-body p + p { margin-top: 18px; }
+  .story-credential { margin-top: 36px; padding: 24px 28px; border-left: 3px solid var(--accent); background: var(--warm-white); }
+  .credential-quote { font-family: var(--font-headline); font-weight: 300; font-style: italic; font-size: 18px; line-height: 1.5; color: var(--navy); letter-spacing: 0.01em; }
+  .credential-source { margin-top: 12px; font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gray-mid); }
+  .image-strip { display: grid; grid-template-columns: 1.6fr 1fr 1fr; grid-template-rows: 320px 280px; gap: 3px; }
+  .img-cell { overflow: hidden; background: var(--navy-mid); position: relative; }
+  .img-cell:first-child { grid-row: span 2; }
+  .img-cell-bg { width: 100%; height: 100%; background-size: cover; background-position: center; transition: transform 0.7s ease, filter 0.4s ease; filter: saturate(0.85); }
+  .img-cell:hover .img-cell-bg { transform: scale(1.04); filter: saturate(1); }
+  .img-caption { position: absolute; bottom: 0; left: 0; right: 0; padding: 20px; background: linear-gradient(0deg, rgba(13,28,58,0.8) 0%, transparent 100%); font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(246,245,241,0.5); opacity: 0; transition: opacity 0.3s; }
+  .img-cell:hover .img-caption { opacity: 1; }
+  .performance-band { background: var(--navy); padding: 80px 48px; }
+  .perf-inner { max-width: 1344px; margin: 0 auto; }
+  .perf-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 56px; }
+  .perf-title { font-family: var(--font-headline); font-weight: 500; font-size: clamp(32px, 3.5vw, 48px); letter-spacing: 0.04em; text-transform: uppercase; color: var(--white); line-height: 1; }
+  .perf-subtitle { font-family: var(--font-body); font-size: 14px; font-weight: 300; color: rgba(246,245,241,0.45); max-width: 360px; line-height: 1.7; text-align: right; }
+  .perf-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border: 1px solid rgba(246,245,241,0.07); }
+  .perf-item { padding: 40px 32px; border-right: 1px solid rgba(246,245,241,0.07); position: relative; }
+  .perf-item:last-child { border-right: none; }
+  .perf-item::before { content: ''; position: absolute; top: 0; left: 32px; right: 32px; height: 2px; background: transparent; transition: background 0.3s; }
+  .perf-item:hover::before { background: var(--accent); }
+  .perf-num { font-family: var(--font-headline); font-weight: 500; font-size: 52px; letter-spacing: 0.02em; color: var(--white); line-height: 1; }
+  .perf-unit { font-size: 22px; color: var(--accent); font-weight: 300; }
+  .perf-label { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(246,245,241,0.35); margin-top: 10px; }
+  .perf-desc { font-family: var(--font-body); font-size: 13px; font-weight: 300; color: rgba(246,245,241,0.45); margin-top: 8px; line-height: 1.6; }
+  .features-section { padding: 120px 48px; max-width: 1440px; margin: 0 auto; }
+  .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 48px; }
+  .feature-card { padding: 48px 40px; background: var(--warm-white); transition: background 0.3s; }
+  .feature-card:hover { background: var(--gray-light); }
+  .feature-number { font-family: var(--font-headline); font-weight: 200; font-size: 64px; color: var(--gray-light); line-height: 1; letter-spacing: 0.02em; transition: color 0.3s; }
+  .feature-card:hover .feature-number { color: var(--accent); }
+  .feature-title { font-family: var(--font-headline); font-weight: 500; font-size: 18px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--navy); margin-top: 16px; margin-bottom: 12px; }
+  .feature-body { font-family: var(--font-body); font-size: 14px; font-weight: 300; line-height: 1.8; color: var(--gray-dark); }
+  .specs-section { background: var(--navy); padding: 100px 48px; scroll-margin-top: 120px; }
+  .specs-inner { max-width: 1000px; margin: 0 auto; }
+  .specs-title { font-family: var(--font-headline); font-weight: 500; font-size: clamp(32px, 3.5vw, 48px); letter-spacing: 0.04em; text-transform: uppercase; color: var(--white); margin-bottom: 48px; }
+  .specs-group { margin-bottom: 40px; }
+  .specs-group-title { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 0; padding-bottom: 12px; border-bottom: 1px solid rgba(246,245,241,0.08); }
+  .spec-row { display: grid; grid-template-columns: 1fr 1fr; padding: 14px 0; border-bottom: 1px solid rgba(246,245,241,0.06); transition: background 0.15s; }
+  .spec-row:hover { background: rgba(246,245,241,0.02); margin: 0 -16px; padding: 14px 16px; }
+  .spec-name { font-family: var(--font-body); font-size: 13px; font-weight: 300; color: rgba(246,245,241,0.45); }
+  .spec-value { font-family: var(--font-body); font-size: 13px; font-weight: 400; color: var(--white); }
+  .specs-download { margin-top: 40px; display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-body); font-size: 11px; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(246,245,241,0.4); text-decoration: none; border-bottom: 1px solid rgba(246,245,241,0.15); padding-bottom: 4px; transition: color 0.2s, border-color 0.2s; }
+  .specs-download:hover { color: var(--white); border-color: rgba(246,245,241,0.5); }
+  .cta-section { padding: 120px 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; max-width: 1440px; margin: 0 auto; }
+  .cta-headline { font-family: var(--font-headline); font-weight: 500; font-size: clamp(32px, 3.8vw, 52px); letter-spacing: 0.04em; text-transform: uppercase; color: var(--navy); line-height: 1.08; }
+  .cta-headline em { font-style: normal; color: var(--accent); }
+  .cta-body { font-size: 15px; font-weight: 300; line-height: 1.85; color: var(--gray-dark); margin-bottom: 36px; }
+  .cta-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn-primary-dark { font-family: var(--font-body); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--white); background: var(--navy); border: 1px solid var(--navy); padding: 13px 28px; text-decoration: none; transition: all 0.25s; display: inline-flex; align-items: center; gap: 10px; }
+  .btn-primary-dark:hover { background: var(--accent); border-color: var(--accent); }
+  .btn-primary-dark svg { transition: transform 0.2s; }
+  .btn-primary-dark:hover svg { transform: translateX(4px); }
+  .btn-ghost-dark { font-family: var(--font-body); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gray-dark); border: 1px solid var(--gray-light); padding: 13px 28px; text-decoration: none; transition: all 0.25s; }
+  .btn-ghost-dark:hover { border-color: var(--navy); color: var(--navy); }
+  .cta-image { aspect-ratio: 4/3; overflow: hidden; background: var(--navy-mid); position: relative; }
+  .cta-image-bg { width: 100%; height: 100%; background-image: url('images/435/interior-cabin.jpg'); background-size: cover; background-position: center; }
+  .related-section { background: var(--navy); padding: 100px 48px; }
+  .related-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 48px; max-width: 1344px; margin-left: auto; margin-right: auto; padding-bottom: 48px; }
+  .related-title { font-family: var(--font-headline); font-weight: 500; font-size: 36px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--white); line-height: 1; }
+  .related-link { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gray-mid); text-decoration: none; display: flex; align-items: center; gap: 8px; transition: color 0.2s, gap 0.2s; }
+  .related-link:hover { color: var(--accent); gap: 14px; }
+  .related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; max-width: 1344px; margin: 0 auto; }
+  .related-card { position: relative; overflow: hidden; background: var(--navy-mid); aspect-ratio: 4/3; text-decoration: none; display: block; cursor: none; }
+  .related-card-bg { width: 100%; height: 100%; background-size: cover; background-position: center; transition: transform 0.6s ease, filter 0.4s; filter: brightness(0.65) saturate(0.8); }
+  .related-card:hover .related-card-bg { transform: scale(1.05); filter: brightness(0.55) saturate(1); }
+  .related-overlay { position: absolute; inset: 0; background: linear-gradient(0deg, rgba(13,28,58,0.9) 0%, transparent 55%); display: flex; flex-direction: column; justify-content: flex-end; padding: 28px; }
+  .related-size { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.2em; color: var(--accent); text-transform: uppercase; margin-bottom: 6px; }
+  .related-name { font-family: var(--font-headline); font-weight: 500; font-size: 24px; color: var(--white); letter-spacing: 0.04em; text-transform: uppercase; line-height: 1; }
+  .related-tagline { font-family: var(--font-body); font-size: 12px; font-weight: 300; color: rgba(246,245,241,0.5); margin-top: 6px; line-height: 1.4; max-height: 0; overflow: hidden; transition: max-height 0.4s, margin 0.3s; }
+  .related-card:hover .related-tagline { max-height: 40px; margin-top: 8px; }
+  .footer-minimal { background: var(--navy); border-top: 1px solid rgba(246,245,241,0.06); padding: 28px 48px; display: flex; justify-content: space-between; align-items: center; }
+  .footer-minimal-logo { color: var(--white); opacity: 0.5; }
+  .footer-minimal-links { display: flex; gap: 24px; }
+  .footer-minimal-links a { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(246,245,241,0.25); text-decoration: none; transition: color 0.2s; }
+  .footer-minimal-links a:hover { color: rgba(246,245,241,0.6); }
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo" aria-label="Arcona Yachts">
+    <svg width="40" height="40" viewBox="0 0 283.46 283.46" fill="none"><path fill="currentColor" d="M71.43,164.1c-.53.03-.78.24-1.07.63l-2.72,3.74c-1.48,1.82-2.75,2.68-3.54,2.72h-30.96c-1.12,0-1.42-.93-1.31-1.14,14.32-26.54,60.72-66.64,109.86-65.77h.03s0,0,0,0h0c.09,0,.16,0,.17,0,49.75-.87,95.95,39.7,109.58,65.35.11.2.55,1.56-.46,1.56h-31.63c-.79-.05-2.35-1.14-4.02-3.49l-2.15-2.98c-.28-.38-.69-.59-1.21-.61H71.43ZM141.51,117.66c-22.43.46-50.82,15.61-64.28,37.04-.46.65.11.73.69.69h128.35c.58.04-.15-1.12-.15-1.12-11.76-19.02-39.26-35.51-64.53-36.62h-.08Z"/></svg>
+  </a>
+  <ul class="nav-links">
+    <li><a href="yachts.html" class="active">Yachts</a></li>
+    <li><a href="events.html">Events</a></li>
+    <li><a href="brokerage.html">Brokerage</a></li>
+    <li><a href="#">News</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="service.html">Service</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Contact</a>
+</nav>
+
+<div class="breadcrumb">
+  <a href="yachts.html">Yachts</a>
+  <span>→</span>
+  <span>435 Mk II</span>
+</div>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-award">
+    <img src="assets/EYOTY_2019_Badge.svg" style="width:88px;height:auto;" alt="European Yacht of the Year 2019">
+  </div>
+  <div class="hero-content">
+    <div class="hero-model-tag">Arcona 435 Mk II</div>
+    <h1 class="hero-title">
+      <strong>The Greyhound</strong>
+      <span class="hero-title-sub">of the Seas.</span>
+    </h1>
+    <p class="hero-tagline">"A fantastic feeling when she takes off."</p>
+    <div class="hero-bottom">
+      <div class="hero-quick-specs">
+        <div class="qs-item">
+          <div class="qs-val">43.5<span class="qs-unit">ft</span></div>
+          <div class="qs-label">Length</div>
+        </div>
+        <div class="qs-item">
+          <div class="qs-val">13.25<span class="qs-unit">m</span></div>
+          <div class="qs-label">LOA</div>
+        </div>
+        <div class="qs-item">
+          <div class="qs-val">4.30<span class="qs-unit">m</span></div>
+          <div class="qs-label">Beam</div>
+        </div>
+        <div class="qs-item">
+          <div class="qs-val">5,800<span class="qs-unit">kg</span></div>
+          <div class="qs-label">Displacement</div>
+        </div>
+      </div>
+      <div class="hero-actions">
+        <a href="#enquire" class="btn-primary">
+          Request Info
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#specs" class="btn-ghost">View Specs</a>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    <span class="scroll-hint-text">Scroll</span>
+  </div>
+</section>
+
+<div class="model-nav">
+  <ul class="model-nav-links">
+    <li><a href="#story" class="active">Story</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#performance">Performance</a></li>
+    <li><a href="#specs">Specifications</a></li>
+    <li><a href="#enquire">Enquire</a></li>
+  </ul>
+  <a href="contact.html" class="model-nav-cta">Contact</a>
+</div>
+
+<section id="story" style="scroll-margin-top:120px;">
+  <div class="story-section">
+    <div class="reveal">
+      <div class="section-tag">The Story</div>
+      <h2 class="story-headline">Speed without<br><em>compromise.</em></h2>
+      <div class="story-credential">
+        <p class="credential-quote">"The 435 Mk II is the most complete performance cruiser we have ever tested. Nothing comes close."</p>
+        <p class="credential-source">— European Yacht of the Year 2019 Jury</p>
+      </div>
+    </div>
+    <div class="reveal reveal-delay-1">
+      <div class="story-body">
+        <p>The Arcona 435 Mk II didn't just win Yacht of the Year. It redefined what a performance cruiser can be. Lighter, stiffer, faster than its predecessor — but with the same commitment to life aboard that Arcona has always carried.</p>
+        <p>The hull is pure performance: a fine entry, flat sections aft, a deep fin keel that generates lift under every point of sail. Push her and she accelerates with a snap that surprises even experienced sailors. Ease off and she settles into a comfortable, confidence-inspiring cruise.</p>
+        <p>Below, the interior is a testament to Swedish craftsmanship. Teak and oak joinery, clean sightlines, a galley designed for passage making. Not a boat to be admired at the dock — a boat to be sailed.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="gallery" style="scroll-margin-top:120px;">
+  <div class="image-strip reveal">
+    <div class="img-cell">
+      <div class="img-cell-bg" style="background-image: url('images/435/sailing-spinnaker-orange.jpg');"></div>
+      <div class="img-caption">Under sail — Arcona 435 Mk II</div>
+    </div>
+    <div class="img-cell">
+      <div class="img-cell-bg" style="background-image: url('images/435/cockpit-crew.jpg');"></div>
+      <div class="img-caption">Cockpit</div>
+    </div>
+    <div class="img-cell">
+      <div class="img-cell-bg" style="background-image: url('images/435/interior-saloon.jpg');"></div>
+      <div class="img-caption">Saloon</div>
+    </div>
+    <div class="img-cell">
+      <div class="img-cell-bg" style="background-image: url('images/435/sailing-red-spinnaker.jpg');"></div>
+      <div class="img-caption">Downwind</div>
+    </div>
+    <div class="img-cell">
+      <div class="img-cell-bg" style="background-image: url('images/435/interior-galley.jpg');"></div>
+      <div class="img-caption">Galley</div>
+    </div>
+  </div>
+</section>
+
+<section id="performance" style="scroll-margin-top:120px;">
+  <div class="performance-band">
+    <div class="perf-inner">
+      <div class="perf-header reveal">
+        <h2 class="perf-title">By the<br>Numbers</h2>
+        <p class="perf-subtitle">Every figure a consequence of one goal — the fastest, most capable boat of her size.</p>
+      </div>
+      <div class="perf-grid reveal reveal-delay-1">
+        <div class="perf-item">
+          <div class="perf-num">5,800<span class="perf-unit">kg</span></div>
+          <div class="perf-label">Displacement</div>
+          <div class="perf-desc">Light enough to fly, heavy enough to feel safe offshore.</div>
+        </div>
+        <div class="perf-item">
+          <div class="perf-num">83<span class="perf-unit">m²</span></div>
+          <div class="perf-label">Upwind Sail Area</div>
+          <div class="perf-desc">A generous rig tuned for both racing and passage making.</div>
+        </div>
+        <div class="perf-item">
+          <div class="perf-num">2.25<span class="perf-unit">m</span></div>
+          <div class="perf-label">Standard Draft</div>
+          <div class="perf-desc">Deep fin keel generates upwind lift. Shoal option available.</div>
+        </div>
+        <div class="perf-item">
+          <div class="perf-num">6<span class="perf-unit">+2</span></div>
+          <div class="perf-label">Berths</div>
+          <div class="perf-desc">Two cabins forward, a generous saloon. Sails well shorthanded.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="features-section">
+  <div class="reveal">
+    <div class="section-tag">What Makes Her</div>
+    <h2 class="story-headline" style="font-size:clamp(28px,3vw,42px);">Three reasons<br>sailors choose the 435 Mk II.</h2>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card reveal reveal-delay-1">
+      <div class="feature-number">01</div>
+      <div class="feature-title">Weight Obsession</div>
+      <div class="feature-body">Every kilo matters. Arcona's construction philosophy starts with removing weight before adding features. The result is a hull-to-displacement ratio that makes other 43-footers feel sluggish.</div>
+    </div>
+    <div class="feature-card reveal reveal-delay-2">
+      <div class="feature-number">02</div>
+      <div class="feature-title">Swedish Joinery</div>
+      <div class="feature-body">Below decks, the 435 Mk II is as refined as any boat in her class. Teak and oak, clean geometry, considered storage. Built on Orust by people who sail.</div>
+    </div>
+    <div class="feature-card reveal reveal-delay-3">
+      <div class="feature-number">03</div>
+      <div class="feature-title">The Helm</div>
+      <div class="feature-body">Two wheels, excellent visibility, a traveller positioned for single-handed control. Designed to be sailed by two across an ocean and raced by four on a Saturday afternoon.</div>
+    </div>
+  </div>
+</section>
+
+<section id="specs" class="specs-section">
+  <div class="specs-inner">
+    <h2 class="specs-title reveal">Specifications</h2>
+    <div class="specs-group reveal">
+      <div class="specs-group-title">Dimensions</div>
+      <div class="spec-row"><span class="spec-name">Length Overall</span><span class="spec-value">13.25 m / 43.5 ft</span></div>
+      <div class="spec-row"><span class="spec-name">Waterline Length</span><span class="spec-value">12.10 m</span></div>
+      <div class="spec-row"><span class="spec-name">Beam</span><span class="spec-value">4.30 m</span></div>
+      <div class="spec-row"><span class="spec-name">Draft — Standard</span><span class="spec-value">2.25 m</span></div>
+      <div class="spec-row"><span class="spec-name">Draft — Shoal</span><span class="spec-value">1.95 m</span></div>
+      <div class="spec-row"><span class="spec-name">Air Draft</span><span class="spec-value">20.60 m</span></div>
+    </div>
+    <div class="specs-group reveal reveal-delay-1">
+      <div class="specs-group-title">Weight & Stability</div>
+      <div class="spec-row"><span class="spec-name">Displacement</span><span class="spec-value">5,800 kg</span></div>
+      <div class="spec-row"><span class="spec-name">Ballast</span><span class="spec-value">2,200 kg</span></div>
+      <div class="spec-row"><span class="spec-name">Ballast Ratio</span><span class="spec-value">38%</span></div>
+    </div>
+    <div class="specs-group reveal reveal-delay-2">
+      <div class="specs-group-title">Sail Plan</div>
+      <div class="spec-row"><span class="spec-name">Mainsail</span><span class="spec-value">51.5 m²</span></div>
+      <div class="spec-row"><span class="spec-name">Jib 100%</span><span class="spec-value">31.5 m²</span></div>
+      <div class="spec-row"><span class="spec-name">Total Upwind</span><span class="spec-value">83 m²</span></div>
+      <div class="spec-row"><span class="spec-name">Spinnaker</span><span class="spec-value">130 m²</span></div>
+      <div class="spec-row"><span class="spec-name">I</span><span class="spec-value">16.20 m</span></div>
+      <div class="spec-row"><span class="spec-name">J</span><span class="spec-value">5.15 m</span></div>
+    </div>
+    <div class="specs-group reveal reveal-delay-3">
+      <div class="specs-group-title">Accommodation</div>
+      <div class="spec-row"><span class="spec-name">Berths</span><span class="spec-value">6 + 2 pilot berths</span></div>
+      <div class="spec-row"><span class="spec-name">Cabins</span><span class="spec-value">2 + saloon</span></div>
+      <div class="spec-row"><span class="spec-name">Heads</span><span class="spec-value">1 (2 optional)</span></div>
+    </div>
+    <div class="specs-group reveal">
+      <div class="specs-group-title">Tanks & Engine</div>
+      <div class="spec-row"><span class="spec-name">Fuel</span><span class="spec-value">120 l</span></div>
+      <div class="spec-row"><span class="spec-name">Water</span><span class="spec-value">200 l</span></div>
+      <div class="spec-row"><span class="spec-name">Engine</span><span class="spec-value">Volvo Penta 40 hp</span></div>
+      <div class="spec-row"><span class="spec-name">CE Category</span><span class="spec-value">A — Ocean</span></div>
+    </div>
+    <a href="#" class="specs-download reveal">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1v8M3 6l4 4 4-4M1 11h12" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Download Full Specification Sheet
+    </a>
+  </div>
+</section>
+
+<section id="enquire" class="cta-section">
+  <div class="reveal">
+    <div class="section-tag">Next Step</div>
+    <h2 class="cta-headline">Ready to sail<br>the <em>435 Mk II?</em></h2>
+    <p class="cta-body">Every Arcona is built to order. Get in touch and we will guide you through layout options, sail plans, electronics packages, and interior finishes. No two boats are exactly the same.</p>
+    <div class="cta-actions">
+      <a href="contact.html" class="btn-primary-dark">
+        Get in Touch
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="#" class="btn-ghost-dark">Download Brochure</a>
+    </div>
+  </div>
+  <div class="cta-image reveal reveal-delay-1">
+    <div class="cta-image-bg"></div>
+  </div>
+</section>
+
+<section class="related-section">
+  <div class="related-header reveal">
+    <div>
+      <div class="section-tag" style="color:rgba(246,245,241,0.3);">Explore the Range</div>
+      <h2 class="related-title">Other Models</h2>
+    </div>
+    <a href="yachts.html" class="related-link">
+      Full Range
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M1 8h14M9 2l6 6-6 6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+  <div class="related-grid reveal reveal-delay-1">
+    <a href="arcona-50.html" class="related-card">
+      <div class="related-card-bg" style="background-image:url('images/50/exterior/arcona-50-drone-17-web.jpg'); background-size:cover; background-position:center;"></div>
+      <div class="related-overlay">
+        <div class="related-size">50 ft — Flagship</div>
+        <div class="related-name">Arcona 50</div>
+        <div class="related-tagline">European Yacht of the Year 2024.</div>
+      </div>
+    </a>
+    <a href="arcona-415.html" class="related-card">
+      <div class="related-card-bg" style="background-image:url('images/415/exterior/arcona-415-2334_e_best_best-e1666255634921.jpg'); background-size:cover; background-position:center;"></div>
+      <div class="related-overlay">
+        <div class="related-size">41.5 ft</div>
+        <div class="related-name">Arcona 415</div>
+        <div class="related-tagline">Beautiful lines. Serious performance.</div>
+      </div>
+    </a>
+    <a href="arcona-385.html" class="related-card">
+      <div class="related-card-bg" style="background-image:url('images/385/exterior/trygg_arcona_jungfru_apr_21_375.jpg'); background-size:cover; background-position:center;"></div>
+      <div class="related-overlay">
+        <div class="related-size">38.5 ft</div>
+        <div class="related-name">Arcona 385</div>
+        <div class="related-tagline">Beautifully balanced.</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<footer class="footer-minimal">
+  <a href="index.html" class="footer-minimal-logo" aria-label="Arcona Yachts">
+    <svg width="32" height="32" viewBox="0 0 283.46 283.46" fill="none"><path fill="currentColor" d="M71.43,164.1c-.53.03-.78.24-1.07.63l-2.72,3.74c-1.48,1.82-2.75,2.68-3.54,2.72h-30.96c-1.12,0-1.42-.93-1.31-1.14,14.32-26.54,60.72-66.64,109.86-65.77h.03s0,0,0,0h0c.09,0,.16,0,.17,0,49.75-.87,95.95,39.7,109.58,65.35.11.2.55,1.56-.46,1.56h-31.63c-.79-.05-2.35-1.14-4.02-3.49l-2.15-2.98c-.28-.38-.69-.59-1.21-.61H71.43ZM141.51,117.66c-22.43.46-50.82,15.61-64.28,37.04-.46.65.11.73.69.69h128.35c.58.04-.15-1.12-.15-1.12-11.76-19.02-39.26-35.51-64.53-36.62h-.08Z"/></svg>
+  </a>
+  <div class="footer-minimal-links">
+    <a href="#">Privacy</a>
+    <a href="#">Cookie Policy</a>
+    <a href="#">© 2026 Arcona Yachts AB</a> &nbsp;·&nbsp; <a href="https://www.najadgroup.se" target="_blank">Najad Group</a>
+  </div>
+</footer>
+
+<script>
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx + 'px'; cursor.style.top = my + 'px'; });
+  function animateRing() { rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12; ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; requestAnimationFrame(animateRing); }
+  animateRing();
+  document.querySelectorAll('a, button').forEach(el => { el.addEventListener('mouseenter', () => ring.classList.add('expand')); el.addEventListener('mouseleave', () => ring.classList.remove('expand')); });
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+  const sections = document.querySelectorAll('section[id]');
+  const modelNavLinks = document.querySelectorAll('.model-nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 160) current = s.id; });
+    modelNavLinks.forEach(a => { a.classList.remove('active'); if (a.getAttribute('href') === '#' + current) a.classList.add('active'); });
+  });
+</script>
+</body>
+</html>

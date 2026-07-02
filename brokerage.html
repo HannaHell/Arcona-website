@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brokerage — Arcona Yachts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,200;0,300;0,400;0,500;0,600;1,200;1,300&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0D1C3A; --navy-mid: #132030; --navy-light: #1E3D5C;
+    --white: #F6F5F1; --warm-white: #EDECE8; --gray-light: #D6D4CF;
+    --gray-mid: #8F8D89; --gray-dark: #484644; --accent: #D4874A;
+    --font-headline: 'Jost', sans-serif; --font-body: 'IBM Plex Sans', sans-serif; --font-mono: 'DM Mono', monospace;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-body); background: var(--white); color: var(--navy); overflow-x: hidden; cursor: none; }
+
+  .cursor { position: fixed; width: 8px; height: 8px; background: var(--navy); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); }
+  .cursor-ring { position: fixed; width: 36px; height: 36px; border: 1px solid var(--navy); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); opacity: 0.4; transition: width 0.2s, height 0.2s, opacity 0.2s; }
+  .cursor-ring.expand { width: 52px; height: 52px; opacity: 0.15; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 20px 48px; background: rgba(13,28,58,0.97); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(246,245,241,0.07); }
+  .nav-logo { color: var(--white); text-decoration: none; opacity: 0.85; transition: opacity 0.2s; display: flex; align-items: center; }
+  .nav-logo:hover { opacity: 1; }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { font-family: var(--font-body); font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(246,245,241,0.5); text-decoration: none; transition: color 0.2s; position: relative; }
+  .nav-links a::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 1px; background: var(--accent); transition: width 0.25s; }
+  .nav-links a:hover { color: var(--white); }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-links a.active { color: var(--white); }
+  .nav-links a.active::after { width: 100%; background: var(--accent); }
+  .nav-cta { font-family: var(--font-body); font-size: 10px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--white); border: 1px solid rgba(246,245,241,0.25); padding: 9px 20px; text-decoration: none; transition: all 0.2s; }
+  .nav-cta:hover { background: var(--accent); border-color: var(--accent); }
+
+  /* PAGE HEADER */
+  .page-header { padding: 160px 48px 80px; background: var(--navy); position: relative; overflow: hidden; }
+  .page-header::before { content: 'BROKERAGE'; position: absolute; right: -20px; top: 50%; transform: translateY(-50%); font-family: var(--font-headline); font-weight: 700; font-size: 160px; color: rgba(246,245,241,0.03); letter-spacing: 0.05em; line-height: 1; pointer-events: none; }
+  .page-header-inner { max-width: 1344px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: flex-end; }
+  .page-tag { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+  .page-tag::before { content: ''; width: 24px; height: 1px; background: var(--accent); }
+  .page-title { font-family: var(--font-headline); font-weight: 500; font-size: clamp(48px, 6vw, 88px); line-height: 0.96; letter-spacing: 0.04em; text-transform: uppercase; color: var(--white); }
+  .page-title strong { font-weight: 600; display: block; }
+  .page-intro { font-family: var(--font-body); font-size: 15px; font-weight: 300; line-height: 1.85; color: rgba(246,245,241,0.55); align-self: flex-end; }
+
+  /* LISTINGS */
+  .listings-section { padding: 80px 48px; max-width: 1344px; margin: 0 auto; }
+  .listings-count { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gray-mid); margin-bottom: 48px; }
+  .listings-grid { display: flex; flex-direction: column; gap: 2px; }
+
+  /* LISTING CARD */
+  .listing-card { display: grid; grid-template-columns: 480px 1fr; background: var(--warm-white); transition: background 0.2s; text-decoration: none; color: inherit; cursor: none; }
+  .listing-card:hover { background: var(--gray-light); }
+
+  .listing-images { position: relative; overflow: hidden; aspect-ratio: 4/3; }
+  .listing-img-main { width: 100%; height: 100%; object-fit: cover; filter: saturate(0.85); transition: filter 0.4s, transform 0.6s; }
+  .listing-card:hover .listing-img-main { filter: saturate(1); transform: scale(1.03); }
+  .listing-img-count { position: absolute; bottom: 16px; right: 16px; font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--white); background: rgba(13,28,58,0.7); padding: 6px 12px; }
+
+  .listing-body { padding: 48px; display: flex; flex-direction: column; justify-content: space-between; }
+  .listing-header { }
+  .listing-meta { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; display: flex; gap: 16px; }
+  .listing-meta span::before { content: '·'; margin-right: 16px; color: var(--gray-light); }
+  .listing-meta span:first-child::before { display: none; }
+  .listing-name { font-family: var(--font-headline); font-weight: 500; font-size: clamp(28px, 3vw, 42px); letter-spacing: 0.04em; text-transform: uppercase; color: var(--navy); line-height: 1.05; margin-bottom: 8px; }
+  .listing-location { font-family: var(--font-body); font-size: 13px; font-weight: 300; color: var(--gray-mid); margin-bottom: 28px; display: flex; align-items: center; gap: 6px; }
+
+  .listing-specs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid var(--gray-light); border-left: 1px solid var(--gray-light); margin-bottom: 36px; }
+  .listing-spec { padding: 16px 20px; border-right: 1px solid var(--gray-light); border-bottom: 1px solid var(--gray-light); }
+  .listing-spec-val { font-family: var(--font-headline); font-weight: 500; font-size: 18px; color: var(--navy); letter-spacing: 0.02em; line-height: 1; }
+  .listing-spec-unit { font-size: 11px; color: var(--accent); }
+  .listing-spec-lbl { font-family: var(--font-mono); font-size: 8px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gray-mid); margin-top: 4px; }
+
+  .listing-footer { display: flex; align-items: center; justify-content: space-between; }
+  .listing-price { font-family: var(--font-headline); font-weight: 500; font-size: 28px; color: var(--navy); letter-spacing: 0.02em; }
+  .listing-price-label { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gray-mid); margin-top: 4px; }
+  .listing-price-poa { font-family: var(--font-headline); font-weight: 300; font-style: italic; font-size: 22px; color: var(--gray-mid); }
+
+  .listing-actions { display: flex; gap: 10px; }
+  .btn-enquire { font-family: var(--font-body); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--white); background: var(--navy); border: 1px solid var(--navy); padding: 12px 24px; text-decoration: none; transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px; cursor: none; }
+  .btn-enquire:hover { background: var(--accent); border-color: var(--accent); }
+  .btn-enquire svg { transition: transform 0.2s; }
+  .btn-enquire:hover svg { transform: translateX(3px); }
+  .btn-details { font-family: var(--font-body); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gray-dark); border: 1px solid var(--gray-light); padding: 12px 24px; text-decoration: none; transition: all 0.2s; cursor: none; }
+  .btn-details:hover { border-color: var(--navy); color: var(--navy); }
+
+  /* CTA */
+  .cta-section { background: var(--navy); padding: 100px 48px; display: flex; align-items: center; justify-content: space-between; gap: 40px; }
+  .cta-text { font-family: var(--font-headline); font-weight: 500; font-size: clamp(28px, 3vw, 44px); letter-spacing: 0.04em; text-transform: uppercase; color: var(--white); line-height: 1.1; max-width: 560px; }
+  .cta-text em { font-style: normal; color: var(--accent); }
+  .cta-body { font-family: var(--font-body); font-size: 14px; font-weight: 300; color: rgba(246,245,241,0.5); margin-top: 16px; max-width: 480px; line-height: 1.7; }
+  .btn-primary { font-family: var(--font-body); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--white); background: var(--accent); border: 1px solid var(--accent); padding: 13px 28px; text-decoration: none; transition: all 0.25s; display: inline-flex; align-items: center; gap: 10px; flex-shrink: 0; cursor: none; }
+  .btn-primary:hover { background: #bf7540; border-color: #bf7540; }
+  .btn-primary svg { transition: transform 0.2s; }
+  .btn-primary:hover svg { transform: translateX(4px); }
+
+  /* FOOTER */
+  .footer-minimal { background: var(--navy); border-top: 1px solid rgba(246,245,241,0.06); padding: 28px 48px; display: flex; justify-content: space-between; align-items: center; }
+  .footer-minimal-logo { color: var(--white); opacity: 0.5; }
+  .footer-minimal-links { display: flex; gap: 24px; }
+  .footer-minimal-links a { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(246,245,241,0.25); text-decoration: none; transition: color 0.2s; }
+  .footer-minimal-links a:hover { color: rgba(246,245,241,0.6); }
+
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.15s; }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo" aria-label="Arcona Yachts">
+    <svg width="40" height="40" viewBox="0 0 283.46 283.46" fill="none"><path fill="currentColor" d="M71.43,164.1c-.53.03-.78.24-1.07.63l-2.72,3.74c-1.48,1.82-2.75,2.68-3.54,2.72h-30.96c-1.12,0-1.42-.93-1.31-1.14,14.32-26.54,60.72-66.64,109.86-65.77h.03s0,0,0,0h0c.09,0,.16,0,.17,0,49.75-.87,95.95,39.7,109.58,65.35.11.2.55,1.56-.46,1.56h-31.63c-.79-.05-2.35-1.14-4.02-3.49l-2.15-2.98c-.28-.38-.69-.59-1.21-.61H71.43ZM141.51,117.66c-22.43.46-50.82,15.61-64.28,37.04-.46.65.11.73.69.69h128.35c.58.04-.15-1.12-.15-1.12-11.76-19.02-39.26-35.51-64.53-36.62h-.08Z"/></svg>
+  </a>
+  <ul class="nav-links">
+    <li><a href="yachts.html">Yachts</a></li>
+    <li><a href="events.html">Events</a></li>
+    <li><a href="brokerage.html" class="active">Brokerage</a></li>
+    <li><a href="#">News</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="service.html">Service</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Contact</a>
+</nav>
+
+<!-- PAGE HEADER -->
+<section class="page-header">
+  <div class="page-header-inner">
+    <div>
+      <div class="page-tag">Pre-owned</div>
+      <h1 class="page-title">Brokerage<br><strong>Yachts</strong></h1>
+    </div>
+    <p class="page-intro">Carefully selected pre-owned Arcona yachts, sold directly by Najad Group. Every listing has been maintained at the Arcona yard in Henån and is presented in verified condition. Contact us directly for viewings and enquiries.</p>
+  </div>
+</section>
+
+<!-- LISTINGS -->
+<section class="listings-section">
+  <div class="listings-count reveal">2 listings available</div>
+  <div class="listings-grid">
+
+    <!-- ARCONA 50 — 2023 -->
+    <div class="listing-card reveal">
+      <div class="listing-images">
+        <img class="listing-img-main"
+          src="images/brokerage/50-005/2023-arcona-50-power-10123706-20260323083211506-1.webp"
+          alt="2023 Arcona 50">
+        <div class="listing-img-count">24 photos</div>
+      </div>
+      <div class="listing-body">
+        <div class="listing-header">
+          <div class="listing-meta">
+            <span>2023</span>
+            <span>European Yacht of the Year 2024</span>
+          </div>
+          <div class="listing-name">Arcona 50</div>
+          <div class="listing-location">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1a3.5 3.5 0 0 1 3.5 3.5C9.5 7.5 6 11 6 11S2.5 7.5 2.5 4.5A3.5 3.5 0 0 1 6 1Z" stroke="currentColor" stroke-width="1" fill="none"/><circle cx="6" cy="4.5" r="1" fill="currentColor"/></svg>
+            Henån, Sweden — maintained at the Arcona yard
+          </div>
+          <div class="listing-specs">
+            <div class="listing-spec">
+              <div class="listing-spec-val">49.2<span class="listing-spec-unit">ft</span></div>
+              <div class="listing-spec-lbl">Length</div>
+            </div>
+            <div class="listing-spec">
+              <div class="listing-spec-val">2023</div>
+              <div class="listing-spec-lbl">Year</div>
+            </div>
+            <div class="listing-spec">
+              <div class="listing-spec-val">110<span class="listing-spec-unit">hp</span></div>
+              <div class="listing-spec-lbl">Engine (new)</div>
+            </div>
+            <div class="listing-spec">
+              <div class="listing-spec-val">Light Oak</div>
+              <div class="listing-spec-lbl">Interior</div>
+            </div>
+            <div class="listing-spec">
+              <div class="listing-spec-val">Flexiteek</div>
+              <div class="listing-spec-lbl">Deck</div>
+            </div>
+            <div class="listing-spec">
+              <div class="listing-spec-val">Carbon</div>
+              <div class="listing-spec-lbl">Wheels</div>
+            </div>
+          </div>
+        </div>
+        <div class="listing-footer">
+          <div>
+            <div class="listing-price-poa">Price on application</div>
+            <div class="listing-price-label">Contact us for pricing</div>
+          </div>
+          <div class="listing-actions">
+            <a href="contact.html" class="btn-enquire">
+              Enquire
+              <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5h12M8 1l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a href="https://www.yachtworld.com/yacht/2023-arcona-50-10123706/" target="_blank" class="btn-details">Full Listing ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ARCONA 380 — 2019 -->
+    <div class="listing-card reveal reveal-delay-1">
+      <div class="listing-images">
+        <img class="listing-img-main"
+          src="images/brokerage/38%202019/6402385_20171017091644355_1_XLARGE.webp"
+          alt="2019 Arcona 380">
+        <div class="listing-img-count">32 photos</div>
+      </div>
+      <div class="listing-body">
+        <div class="listing-header">
+          <div class="listing-meta">
+            <span>2019</span>
+            <span>680 engine hours</span>
+          </div>
+          <div class="listing-name">Arcona 380</div>
+          <div class="listing-location">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1a3.5 3.5 0 0 1 3.5 3.5C9.5 7.5 6 11 6 11S2.5 7.5 2.5 4.5A3.5 3.5 0 0 1 6 1Z" stroke="currentColor" stroke-width="1" fill="none"/><circle cx="6" cy="4.5" r="1" fill="currentColor"/></svg>
+            Stockholm, Sweden
+          </div>
+          <div class="listing-specs">
+            <div class="listing-spec">
+              <div class="listing-spec-val">38.5<span class="listing-spec-unit">ft</span></div>
+              <div class="listing-spec-lbl">Length</div>
+            </div>
+            <div class="listing-spec">
+              <div class="listing-spec-val">2019</div>
+              <div class="listing-spec-lbl">Year</div>
+            </div>
+            <div class="listing-spec">
+              <div class="listing-spec-val">680<span class="listing-spec-unit">h</span></div>
+              <div class="listing-spec-lbl">Engine hours</div>
+            </div>
+            <div class="listing-spec">
+              <div class="listing-spec-val">Yanmar</div>
+              <div class="listing-spec-lbl">3YM / SD20</div>
+            </div>
+            <div class="listing-spec">
+              <div class="listing-spec-val">30<span class="listing-spec-unit">hp</span></div>
+              <div class="listing-spec-lbl">Power</div>
+            </div>
+            <div class="listing-spec">
+              <div class="listing-spec-val">R/C</div>
+              <div class="listing-spec-lbl">Class</div>
+            </div>
+          </div>
+        </div>
+        <div class="listing-footer">
+          <div>
+            <div class="listing-price">3 995 000 <span style="font-size:16px;font-weight:300;color:var(--gray-mid);">kr</span></div>
+            <div class="listing-price-label">Tax included</div>
+          </div>
+          <div class="listing-actions">
+            <a href="contact.html" class="btn-enquire">
+              Enquire
+              <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5h12M8 1l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a href="https://www.yachtworld.com/yacht/2019-arcona-380-10197993/" target="_blank" class="btn-details">Full Listing ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="reveal">
+    <h2 class="cta-text">Looking to sell<br>your <em>Arcona?</em></h2>
+    <p class="cta-body">We handle brokerage for Arcona yachts directly. If you own an Arcona and are thinking about selling, get in touch — we know these boats better than anyone.</p>
+  </div>
+  <a href="contact.html" class="btn-primary reveal reveal-delay-1">
+    Get in Touch
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </a>
+</section>
+
+<footer class="footer-minimal">
+  <a href="index.html" class="footer-minimal-logo" aria-label="Arcona Yachts">
+    <svg width="32" height="32" viewBox="0 0 283.46 283.46" fill="none"><path fill="currentColor" d="M71.43,164.1c-.53.03-.78.24-1.07.63l-2.72,3.74c-1.48,1.82-2.75,2.68-3.54,2.72h-30.96c-1.12,0-1.42-.93-1.31-1.14,14.32-26.54,60.72-66.64,109.86-65.77h.03s0,0,0,0h0c.09,0,.16,0,.17,0,49.75-.87,95.95,39.7,109.58,65.35.11.2.55,1.56-.46,1.56h-31.63c-.79-.05-2.35-1.14-4.02-3.49l-2.15-2.98c-.28-.38-.69-.59-1.21-.61H71.43ZM141.51,117.66c-22.43.46-50.82,15.61-64.28,37.04-.46.65.11.73.69.69h128.35c.58.04-.15-1.12-.15-1.12-11.76-19.02-39.26-35.51-64.53-36.62h-.08Z"/></svg>
+  </a>
+  <div class="footer-minimal-links">
+    <a href="#">Privacy</a>
+    <a href="#">Cookie Policy</a>
+    <a href="#">© 2026 Arcona Yachts AB</a> &nbsp;·&nbsp; <a href="https://www.najadgroup.se" target="_blank">Najad Group</a>
+  </div>
+</footer>
+
+<script>
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx + 'px'; cursor.style.top = my + 'px'; });
+  function animateRing() { rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12; ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; requestAnimationFrame(animateRing); }
+  animateRing();
+  document.querySelectorAll('a, button').forEach(el => { el.addEventListener('mouseenter', () => ring.classList.add('expand')); el.addEventListener('mouseleave', () => ring.classList.remove('expand')); });
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

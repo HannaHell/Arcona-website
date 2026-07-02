@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Service — Arcona Yachts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,200;0,300;0,400;0,500;0,600;1,200;1,300&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0D1C3A; --navy-mid: #132030; --navy-light: #1E3D5C;
+    --white: #F6F5F1; --warm-white: #EDECE8; --gray-light: #D6D4CF;
+    --gray-mid: #8F8D89; --gray-dark: #484644; --accent: #D4874A;
+    --font-headline: 'Jost', sans-serif; --font-body: 'IBM Plex Sans', sans-serif; --font-mono: 'DM Mono', monospace;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-body); background: var(--white); color: var(--navy); overflow-x: hidden; cursor: none; }
+  .cursor { position: fixed; width: 8px; height: 8px; background: var(--navy); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); }
+  .cursor-ring { position: fixed; width: 36px; height: 36px; border: 1px solid var(--navy); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); opacity: 0.4; transition: width 0.2s, height 0.2s, opacity 0.2s; }
+  .cursor-ring.expand { width: 52px; height: 52px; opacity: 0.15; }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 20px 48px; background: rgba(13,28,58,0.97); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(246,245,241,0.07); }
+  .nav-logo { color: var(--white); text-decoration: none; opacity: 0.85; transition: opacity 0.2s; display: flex; align-items: center; }
+  .nav-logo:hover { opacity: 1; }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { font-family: var(--font-body); font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(246,245,241,0.5); text-decoration: none; transition: color 0.2s; position: relative; }
+  .nav-links a::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 1px; background: var(--accent); transition: width 0.25s; }
+  .nav-links a:hover { color: var(--white); }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-links a.active { color: var(--white); }
+  .nav-links a.active::after { width: 100%; background: var(--accent); }
+  .nav-cta { font-family: var(--font-body); font-size: 10px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--white); border: 1px solid rgba(246,245,241,0.25); padding: 9px 20px; text-decoration: none; transition: all 0.2s; }
+  .nav-cta:hover { background: var(--accent); border-color: var(--accent); }
+
+  /* PAGE HEADER */
+  .page-header { padding: 160px 48px 80px; background: var(--navy); position: relative; overflow: hidden; }
+  .page-header::before { content: 'SERVICE'; position: absolute; right: -20px; top: 50%; transform: translateY(-50%); font-family: var(--font-headline); font-weight: 700; font-size: 200px; color: rgba(246,245,241,0.03); letter-spacing: 0.05em; line-height: 1; pointer-events: none; }
+  .page-header-inner { max-width: 1344px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: flex-end; }
+  .page-tag { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+  .page-tag::before { content: ''; width: 24px; height: 1px; background: var(--accent); }
+  .page-title { font-family: var(--font-headline); font-weight: 500; font-size: clamp(48px, 6vw, 88px); line-height: 0.96; letter-spacing: 0.04em; text-transform: uppercase; color: var(--white); }
+  .page-title strong { font-weight: 600; display: block; }
+  .page-intro { font-family: var(--font-body); font-size: 15px; font-weight: 300; line-height: 1.85; color: rgba(246,245,241,0.55); align-self: flex-end; }
+
+  /* OYS INTRO */
+  .oys-section { padding: 100px 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; max-width: 1344px; margin: 0 auto; }
+  .oys-headline { font-family: var(--font-headline); font-weight: 500; font-size: clamp(32px, 3.5vw, 48px); letter-spacing: 0.04em; text-transform: uppercase; color: var(--navy); line-height: 1.06; margin-bottom: 28px; }
+  .oys-headline em { font-style: normal; color: var(--accent); }
+  .oys-body { font-size: 15px; font-weight: 300; line-height: 1.9; color: var(--gray-dark); }
+  .oys-body p + p { margin-top: 18px; }
+  .oys-link { display: inline-flex; align-items: center; gap: 8px; margin-top: 28px; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--navy); text-decoration: none; border-bottom: 1px solid var(--gray-light); padding-bottom: 4px; transition: color 0.2s, border-color 0.2s, gap 0.2s; }
+  .oys-link:hover { color: var(--accent); border-color: var(--accent); gap: 14px; }
+
+  .oys-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+  .oys-stat { background: var(--warm-white); padding: 36px 32px; transition: background 0.2s; }
+  .oys-stat:hover { background: var(--gray-light); }
+  .oys-stat-val { font-family: var(--font-headline); font-weight: 500; font-size: 48px; color: var(--navy); line-height: 1; letter-spacing: 0.02em; }
+  .oys-stat-unit { font-size: 20px; color: var(--accent); }
+  .oys-stat-label { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gray-mid); margin-top: 8px; }
+
+  /* SERVICES GRID */
+  .services-section { background: var(--navy); padding: 100px 48px; }
+  .services-inner { max-width: 1344px; margin: 0 auto; }
+  .services-header { margin-bottom: 56px; }
+  .section-tag { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(246,245,241,0.3); margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+  .section-tag::before { content: ''; width: 24px; height: 1px; background: var(--accent); }
+  .services-title { font-family: var(--font-headline); font-weight: 500; font-size: clamp(32px, 3.5vw, 48px); letter-spacing: 0.04em; text-transform: uppercase; color: var(--white); line-height: 1; }
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+  .service-card { background: var(--navy-mid); padding: 48px 40px; border-top: 2px solid transparent; transition: border-color 0.3s, background 0.2s; }
+  .service-card:hover { border-top-color: var(--accent); background: var(--navy-light); }
+  .service-icon { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
+  .service-title { font-family: var(--font-headline); font-weight: 500; font-size: 20px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--white); margin-bottom: 16px; line-height: 1.1; }
+  .service-body { font-family: var(--font-body); font-size: 13px; font-weight: 300; line-height: 1.8; color: rgba(246,245,241,0.5); }
+
+  /* EASY OWNERSHIP */
+  .ownership-section { padding: 100px 48px; max-width: 1344px; margin: 0 auto; }
+  .ownership-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .ownership-headline { font-family: var(--font-headline); font-weight: 500; font-size: clamp(32px, 3.5vw, 48px); letter-spacing: 0.04em; text-transform: uppercase; color: var(--navy); line-height: 1.06; margin-bottom: 28px; }
+  .ownership-headline em { font-style: normal; color: var(--accent); }
+  .ownership-body { font-size: 15px; font-weight: 300; line-height: 1.9; color: var(--gray-dark); }
+  .ownership-body p + p { margin-top: 18px; }
+  .ownership-contact { margin-top: 36px; display: flex; flex-direction: column; gap: 8px; }
+  .ownership-contact-label { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); }
+  .ownership-contact a { font-family: var(--font-body); font-size: 14px; font-weight: 300; color: var(--navy); text-decoration: none; transition: color 0.2s; }
+  .ownership-contact a:hover { color: var(--accent); }
+
+  .ownership-pull { background: var(--navy); padding: 56px 48px; display: flex; flex-direction: column; gap: 24px; }
+  .pull-quote { font-family: var(--font-headline); font-weight: 300; font-style: italic; font-size: clamp(20px, 2.2vw, 28px); line-height: 1.4; color: var(--white); border-left: 3px solid var(--accent); padding-left: 24px; }
+  .pull-source { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(246,245,241,0.35); padding-left: 24px; }
+
+  /* CTA */
+  .cta-section { background: var(--warm-white); border-top: 1px solid var(--gray-light); padding: 80px 48px; }
+  .cta-inner { max-width: 1344px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 40px; }
+  .cta-headline { font-family: var(--font-headline); font-weight: 500; font-size: clamp(28px, 3vw, 44px); letter-spacing: 0.04em; text-transform: uppercase; color: var(--navy); line-height: 1.1; }
+  .cta-headline em { font-style: normal; color: var(--accent); }
+  .cta-actions { display: flex; gap: 12px; flex-shrink: 0; }
+  .btn-primary { font-family: var(--font-body); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--white); background: var(--navy); border: 1px solid var(--navy); padding: 13px 28px; text-decoration: none; transition: all 0.25s; display: inline-flex; align-items: center; gap: 10px; cursor: none; }
+  .btn-primary:hover { background: var(--accent); border-color: var(--accent); }
+  .btn-primary svg { transition: transform 0.2s; }
+  .btn-primary:hover svg { transform: translateX(4px); }
+  .btn-ghost { font-family: var(--font-body); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gray-dark); border: 1px solid var(--gray-light); padding: 13px 28px; text-decoration: none; transition: all 0.25s; cursor: none; }
+  .btn-ghost:hover { border-color: var(--navy); color: var(--navy); }
+
+  /* FOOTER */
+  .footer-minimal { background: var(--navy); border-top: 1px solid rgba(246,245,241,0.06); padding: 28px 48px; display: flex; justify-content: space-between; align-items: center; }
+  .footer-minimal-logo { color: var(--white); opacity: 0.5; }
+  .footer-minimal-links { display: flex; gap: 24px; }
+  .footer-minimal-links a { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(246,245,241,0.25); text-decoration: none; transition: color 0.2s; }
+  .footer-minimal-links a:hover { color: rgba(246,245,241,0.6); }
+
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+  .reveal-delay-5 { transition-delay: 0.5s; }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo" aria-label="Arcona Yachts">
+    <svg width="40" height="40" viewBox="0 0 283.46 283.46" fill="none"><path fill="currentColor" d="M71.43,164.1c-.53.03-.78.24-1.07.63l-2.72,3.74c-1.48,1.82-2.75,2.68-3.54,2.72h-30.96c-1.12,0-1.42-.93-1.31-1.14,14.32-26.54,60.72-66.64,109.86-65.77h.03s0,0,0,0h0c.09,0,.16,0,.17,0,49.75-.87,95.95,39.7,109.58,65.35.11.2.55,1.56-.46,1.56h-31.63c-.79-.05-2.35-1.14-4.02-3.49l-2.15-2.98c-.28-.38-.69-.59-1.21-.61H71.43ZM141.51,117.66c-22.43.46-50.82,15.61-64.28,37.04-.46.65.11.73.69.69h128.35c.58.04-.15-1.12-.15-1.12-11.76-19.02-39.26-35.51-64.53-36.62h-.08Z"/></svg>
+  </a>
+  <ul class="nav-links">
+    <li><a href="yachts.html">Yachts</a></li>
+    <li><a href="events.html">Events</a></li>
+    <li><a href="brokerage.html">Brokerage</a></li>
+    <li><a href="#">News</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="service.html" class="active">Service</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Contact</a>
+</nav>
+
+<!-- PAGE HEADER -->
+<section class="page-header">
+  <div class="page-header-inner">
+    <div>
+      <div class="page-tag">Orust Yacht Service</div>
+      <h1 class="page-title">Service &<br><strong>Care</strong></h1>
+    </div>
+    <p class="page-intro">Your Arcona is built to last. Keeping her that way is straightforward — we have one of Scandinavia's leading service yards right here at the same address in Henån. Nobody knows these boats better than the people who build them.</p>
+  </div>
+</section>
+
+<!-- OYS INTRO -->
+<section class="oys-section">
+  <div class="reveal">
+    <div style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gray-mid);margin-bottom:20px;display:flex;align-items:center;gap:12px;"><span style="width:24px;height:1px;background:var(--accent);display:inline-block;"></span>The Yard</div>
+    <h2 class="oys-headline">Service by the<br>people who<br><em>built your boat.</em></h2>
+    <div class="oys-body">
+      <p>Orust Yacht Service — OYS — is part of the <a href="https://www.najadgroup.se" target="_blank" style="color:var(--accent);text-decoration:none;">Najad Group</a>, operating from the same yard in Henån where Arcona yachts are produced. With over 300 boat spaces, two cranes handling up to 40 tonnes, and craftsmen who have spent careers working on performance sailing yachts, it is one of northern Europe's most capable service operations.</p>
+      <p>For Arcona owners, this means your yacht comes back to the people who know it inside out. The same hands that built it can service it, repair it, and prepare it for whatever you have planned next.</p>
+    </div>
+    <a href="https://www.orustyachtservice.se/en/" target="_blank" class="oys-link">
+      Visit orustyachtservice.se
+      <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5h12M8 1l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+  <div class="oys-stats reveal reveal-delay-1">
+    <div class="oys-stat">
+      <div class="oys-stat-val">300<span class="oys-stat-unit">+</span></div>
+      <div class="oys-stat-label">Boat spaces</div>
+    </div>
+    <div class="oys-stat">
+      <div class="oys-stat-val">40<span class="oys-stat-unit">t</span></div>
+      <div class="oys-stat-label">Crane capacity</div>
+    </div>
+    <div class="oys-stat">
+      <div class="oys-stat-val">100<span class="oys-stat-unit">+</span></div>
+      <div class="oys-stat-label">Years combined experience</div>
+    </div>
+    <div class="oys-stat">
+      <div class="oys-stat-val">Henån</div>
+      <div class="oys-stat-label">Same address as the yard</div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services-section">
+  <div class="services-inner">
+    <div class="services-header reveal">
+      <div class="section-tag">What We Offer</div>
+      <h2 class="services-title">Full care,<br>one location.</h2>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal reveal-delay-1">
+        <div class="service-icon">01 — Storage</div>
+        <div class="service-title">Winter Storage</div>
+        <div class="service-body">Store your Arcona safely and securely in our modern, climate-controlled storage halls — tempered and dehumidified. Indoor and outdoor options available, with launch and recovery handled in-house.</div>
+      </div>
+      <div class="service-card reveal reveal-delay-2">
+        <div class="service-icon">02 — Maintenance</div>
+        <div class="service-title">Service & Repair</div>
+        <div class="service-body">Annual service, osmosis treatment, antifouling, engine maintenance, teak renewal and full hull repairs. Composite specialists, woodworkers, engine technicians and riggers — all under one roof.</div>
+      </div>
+      <div class="service-card reveal reveal-delay-3">
+        <div class="service-icon">03 — Rig</div>
+        <div class="service-title">Rig & Sails</div>
+        <div class="service-body">Full rigging services including rig inspections, standing rigging replacement, mast work and sail repairs. A dedicated rigging hall and sail dryer on site. We prepare rigs for offshore passages and racing alike.</div>
+      </div>
+      <div class="service-card reveal reveal-delay-1">
+        <div class="service-icon">04 — Electronics</div>
+        <div class="service-title">Installation & Equipment</div>
+        <div class="service-body">Anchor winches, electric winches, navigation and instrument installation, solar panels, battery and energy solutions. Full electrical upgrades and new systems fitted to your specification.</div>
+      </div>
+      <div class="service-card reveal reveal-delay-2">
+        <div class="service-icon">05 — Insurance</div>
+        <div class="service-title">Insurance Claims</div>
+        <div class="service-body">Experienced in handling all types of insurance cases — groundings, collisions, rig damage and water ingress. We work directly with insurers and have handled over 50 cases per season in recent years.</div>
+      </div>
+      <div class="service-card reveal reveal-delay-3">
+        <div class="service-icon">06 — Parts</div>
+        <div class="service-title">Spare Parts</div>
+        <div class="service-body">A marine spare parts shop on site, stocked with essentials for Arcona and other performance yachts. We can also source and supply specific parts for your model — contact us with your requirements.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EASY OWNERSHIP -->
+<section class="ownership-section">
+  <div class="ownership-inner">
+    <div class="reveal">
+      <div style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gray-mid);margin-bottom:20px;display:flex;align-items:center;gap:12px;"><span style="width:24px;height:1px;background:var(--accent);display:inline-block;"></span>Easy Ownership</div>
+      <h2 class="ownership-headline">We keep your<br>Arcona ready<br>to <em>sail.</em></h2>
+      <div class="ownership-body">
+        <p>One of the advantages of buying an Arcona directly from the yard is that service stays simple. You know exactly where your boat is, who is working on it, and what has been done. No intermediaries, no guesswork.</p>
+        <p>We can arrange transportation of your yacht to and from Henån if you are not local — and for owners planning longer passages or offshore adventures, we offer preparation packages tailored to your itinerary.</p>
+      </div>
+      <div class="ownership-contact">
+        <div class="ownership-contact-label">Contact OYS directly</div>
+        <a href="mailto:info@orustyachtservice.se">info@orustyachtservice.se</a>
+        <a href="tel:+46304360000">+46 304 36 000</a>
+      </div>
+    </div>
+    <div class="ownership-pull reveal reveal-delay-1">
+      <p class="pull-quote">"Today's sailing yachts are much more complex than before. We have developed a unique and efficient service and maintenance scheme to deliver high quality to a wide range of boat brands."</p>
+      <p class="pull-source">— Andreas Samuelsson, CEO Orust Yacht Service</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <h2 class="cta-headline reveal">Ready to book<br>your <em>Arcona in for service?</em></h2>
+    <div class="cta-actions reveal reveal-delay-1">
+      <a href="mailto:info@orustyachtservice.se" class="btn-primary">
+        Contact OYS
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="https://www.orustyachtservice.se/en/" target="_blank" class="btn-ghost">Visit OYS Website ↗</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer-minimal">
+  <a href="index.html" class="footer-minimal-logo" aria-label="Arcona Yachts">
+    <svg width="32" height="32" viewBox="0 0 283.46 283.46" fill="none"><path fill="currentColor" d="M71.43,164.1c-.53.03-.78.24-1.07.63l-2.72,3.74c-1.48,1.82-2.75,2.68-3.54,2.72h-30.96c-1.12,0-1.42-.93-1.31-1.14,14.32-26.54,60.72-66.64,109.86-65.77h.03s0,0,0,0h0c.09,0,.16,0,.17,0,49.75-.87,95.95,39.7,109.58,65.35.11.2.55,1.56-.46,1.56h-31.63c-.79-.05-2.35-1.14-4.02-3.49l-2.15-2.98c-.28-.38-.69-.59-1.21-.61H71.43ZM141.51,117.66c-22.43.46-50.82,15.61-64.28,37.04-.46.65.11.73.69.69h128.35c.58.04-.15-1.12-.15-1.12-11.76-19.02-39.26-35.51-64.53-36.62h-.08Z"/></svg>
+  </a>
+  <div class="footer-minimal-links">
+    <a href="#">Privacy</a>
+    <a href="#">Cookie Policy</a>
+    <a href="#">© 2026 Arcona Yachts AB</a> &nbsp;·&nbsp; <a href="https://www.najadgroup.se" target="_blank">Najad Group</a>
+  </div>
+</footer>
+
+<script>
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx + 'px'; cursor.style.top = my + 'px'; });
+  function animateRing() { rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12; ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; requestAnimationFrame(animateRing); }
+  animateRing();
+  document.querySelectorAll('a, button').forEach(el => { el.addEventListener('mouseenter', () => ring.classList.add('expand')); el.addEventListener('mouseleave', () => ring.classList.remove('expand')); });
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
