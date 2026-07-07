@@ -705,6 +705,41 @@
   .reveal-delay-1 { transition-delay: 0.1s; }
   .reveal-delay-2 { transition-delay: 0.2s; }
   .reveal-delay-3 { transition-delay: 0.3s; }
+
+  @media (max-width: 768px) {
+    nav { padding: 16px 20px; }
+    .nav-links { display: none; }
+    .nav-cta { font-size: 12px; padding: 10px 18px; }
+    .breadcrumb { left: 20px; }
+    .hero-content { padding: 0 20px 48px; }
+    .hero-title { font-size: clamp(44px, 11vw, 72px); }
+    .hero-bottom { flex-direction: column; gap: 24px; align-items: flex-start; }
+    .hero-quick-specs { gap: 20px; flex-wrap: wrap; }
+    .hero-actions { flex-direction: column; gap: 10px; width: 100%; }
+    .hero-actions a { text-align: center; justify-content: center; }
+    .model-nav { padding: 0 20px; overflow-x: auto; }
+    .model-nav-links { gap: 0; }
+    .model-nav-links a { padding: 14px 14px; font-size: 10px; }
+    .story-section { padding: 60px 20px; grid-template-columns: 1fr; gap: 32px; }
+    .image-strip { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+    .img-cell:first-child { grid-row: span 1; grid-column: span 2; aspect-ratio: 16/9; }
+    .interior-section { padding: 60px 20px; }
+    .interior-inner { padding: 0; }
+    .interior-grid { grid-template-columns: repeat(2, 1fr) !important; }
+    .interior-header { flex-direction: column; gap: 16px; margin-bottom: 32px; }
+    .performance-band { padding: 60px 20px; }
+    .perf-header { flex-direction: column; gap: 16px; align-items: flex-start; }
+    .perf-grid { grid-template-columns: repeat(2, 1fr); }
+    .perf-item { border-right: none; border-bottom: 1px solid rgba(246,245,241,0.07); }
+    .features-section { padding: 60px 20px; }
+    .features-grid { grid-template-columns: 1fr; }
+    .specs-section { padding: 60px 20px; }
+    .cta-section { padding: 60px 20px; grid-template-columns: 1fr; gap: 32px; }
+    .cta-image { display: none; }
+    .related-section { padding: 60px 20px; }
+    .related-grid { grid-template-columns: 1fr; }
+    .footer-minimal { padding: 20px; flex-direction: column; gap: 16px; }
+  }
 </style>
 </head>
 <body>
