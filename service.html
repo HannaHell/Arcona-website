@@ -116,6 +116,46 @@
   .reveal-delay-3 { transition-delay: 0.3s; }
   .reveal-delay-4 { transition-delay: 0.4s; }
   .reveal-delay-5 { transition-delay: 0.5s; }
+
+  @media (max-width: 768px) {
+    nav { padding: 16px 20px !important; }
+    .nav-links { display: none !important; }
+    .nav-cta { font-size: 12px !important; padding: 10px 18px !important; }
+    .page-header { padding: 100px 20px 40px !important; }
+    .page-header-inner { grid-template-columns: 1fr !important; gap: 20px !important; }
+    .page-header::before { display: none !important; }
+    .story-section, .oys-section, .ownership-section, .details-section { padding: 48px 20px !important; grid-template-columns: 1fr !important; gap: 28px !important; }
+    .dna-section { padding: 48px 20px !important; }
+    .dna-inner { grid-template-columns: 1fr !important; gap: 28px !important; }
+    .full-img { aspect-ratio: 16/9 !important; }
+    .numbers-section { padding: 40px 20px !important; }
+    .numbers-grid { grid-template-columns: repeat(2, 1fr) !important; }
+    .number-val { font-size: 40px !important; }
+    .suppliers-section { padding: 40px 20px !important; }
+    .cta-section { padding: 48px 20px !important; flex-direction: column !important; gap: 20px !important; align-items: flex-start !important; }
+    .cta-inner { flex-direction: column !important; gap: 20px !important; align-items: flex-start !important; }
+    .team-grid, .team-grid-row2 { grid-template-columns: 1fr !important; }
+    .team-card { padding: 32px 28px !important; }
+    .office-section { padding: 48px 20px !important; }
+    .office-inner { grid-template-columns: 1fr !important; gap: 28px !important; }
+    .office-image { display: none !important; }
+    .listing-card { grid-template-columns: 1fr !important; }
+    .listing-images { aspect-ratio: 16/9 !important; }
+    .listing-body { padding: 20px !important; }
+    .listing-specs { grid-template-columns: repeat(2, 1fr) !important; }
+    .listing-footer { flex-direction: column !important; gap: 16px !important; align-items: flex-start !important; }
+    .events-section { padding: 48px 20px !important; }
+    .event-card { grid-template-columns: 80px 1fr !important; }
+    .event-action-col { display: none !important; }
+    .appointment-banner { flex-direction: column !important; gap: 16px !important; padding: 28px 20px !important; }
+    .services-grid { grid-template-columns: 1fr !important; }
+    .oys-stats { grid-template-columns: 1fr 1fr !important; }
+    .oys-section { grid-template-columns: 1fr !important; }
+    .footer-minimal { padding: 20px !important; flex-direction: column !important; gap: 12px !important; }
+    footer { padding: 40px 20px 24px !important; }
+    .footer-grid { grid-template-columns: 1fr 1fr !important; gap: 24px !important; }
+    .footer-bottom { flex-direction: column !important; gap: 12px !important; align-items: flex-start !important; }
+  }
 </style>
 </head>
 <body>

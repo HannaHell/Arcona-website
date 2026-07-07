@@ -707,38 +707,42 @@
   .reveal-delay-3 { transition-delay: 0.3s; }
 
   @media (max-width: 768px) {
-    nav { padding: 16px 20px; }
-    .nav-links { display: none; }
-    .nav-cta { font-size: 12px; padding: 10px 18px; }
-    .breadcrumb { left: 20px; }
-    .hero-content { padding: 0 20px 48px; }
-    .hero-title { font-size: clamp(44px, 11vw, 72px); }
-    .hero-bottom { flex-direction: column; gap: 24px; align-items: flex-start; }
-    .hero-quick-specs { gap: 20px; flex-wrap: wrap; }
-    .hero-actions { flex-direction: column; gap: 10px; width: 100%; }
-    .hero-actions a { text-align: center; justify-content: center; }
-    .model-nav { padding: 0 20px; overflow-x: auto; }
-    .model-nav-links { gap: 0; }
-    .model-nav-links a { padding: 14px 14px; font-size: 10px; }
-    .story-section { padding: 60px 20px; grid-template-columns: 1fr; gap: 32px; }
-    .image-strip { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
-    .img-cell:first-child { grid-row: span 1; grid-column: span 2; aspect-ratio: 16/9; }
-    .interior-section { padding: 60px 20px; }
-    .interior-inner { padding: 0; }
+    nav { padding: 16px 20px !important; }
+    .nav-links { display: none !important; }
+    .nav-cta { font-size: 12px !important; padding: 10px 18px !important; }
+    .breadcrumb { left: 20px !important; top: 68px !important; }
+    .hero { min-height: 100svh; }
+    .hero-content { padding: 0 20px 40px !important; }
+    .hero-title { font-size: clamp(40px, 10vw, 68px) !important; }
+    .hero-tagline { font-size: 16px !important; }
+    .hero-bottom { flex-direction: column !important; gap: 20px !important; align-items: flex-start !important; }
+    .hero-quick-specs { gap: 16px !important; flex-wrap: wrap !important; }
+    .hero-actions { flex-direction: column !important; gap: 10px !important; width: 100% !important; }
+    .hero-actions a { text-align: center !important; justify-content: center !important; }
+    .model-nav { padding: 0 12px !important; overflow-x: auto !important; }
+    .model-nav-links a { padding: 12px 10px !important; font-size: 10px !important; }
+    .model-nav-cta { display: none !important; }
+    .story-section { padding: 48px 20px !important; grid-template-columns: 1fr !important; gap: 28px !important; }
+    .image-strip { grid-template-columns: 1fr 1fr !important; grid-template-rows: auto !important; }
+    .img-cell:first-child { grid-row: span 1 !important; grid-column: span 2 !important; aspect-ratio: 16/9 !important; }
+    .interior-section { padding: 48px 20px !important; }
     .interior-grid { grid-template-columns: repeat(2, 1fr) !important; }
-    .interior-header { flex-direction: column; gap: 16px; margin-bottom: 32px; }
-    .performance-band { padding: 60px 20px; }
-    .perf-header { flex-direction: column; gap: 16px; align-items: flex-start; }
-    .perf-grid { grid-template-columns: repeat(2, 1fr); }
-    .perf-item { border-right: none; border-bottom: 1px solid rgba(246,245,241,0.07); }
-    .features-section { padding: 60px 20px; }
-    .features-grid { grid-template-columns: 1fr; }
-    .specs-section { padding: 60px 20px; }
-    .cta-section { padding: 60px 20px; grid-template-columns: 1fr; gap: 32px; }
-    .cta-image { display: none; }
-    .related-section { padding: 60px 20px; }
-    .related-grid { grid-template-columns: 1fr; }
-    .footer-minimal { padding: 20px; flex-direction: column; gap: 16px; }
+    .interior-header { flex-direction: column !important; gap: 12px !important; margin-bottom: 24px !important; }
+    .performance-band { padding: 48px 20px !important; }
+    .perf-header { flex-direction: column !important; gap: 12px !important; align-items: flex-start !important; }
+    .perf-grid { grid-template-columns: repeat(2, 1fr) !important; }
+    .perf-item { border-right: none !important; border-bottom: 1px solid rgba(246,245,241,0.07) !important; }
+    .perf-num { font-size: 36px !important; }
+    .features-section { padding: 48px 20px !important; }
+    .features-grid { grid-template-columns: 1fr !important; }
+    .specs-section { padding: 48px 20px !important; }
+    .specs-inner { max-width: 100% !important; }
+    .cta-section { padding: 48px 20px !important; grid-template-columns: 1fr !important; gap: 28px !important; }
+    .cta-image { display: none !important; }
+    .related-section { padding: 48px 20px !important; }
+    .related-grid { grid-template-columns: 1fr !important; }
+    .related-header { flex-direction: column !important; gap: 12px !important; padding-bottom: 24px !important; }
+    .footer-minimal { padding: 20px !important; flex-direction: column !important; gap: 12px !important; }
   }
 </style>
 </head>
