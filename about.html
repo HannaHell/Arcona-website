@@ -26,7 +26,7 @@
   .nav-logo { color: var(--white); text-decoration: none; opacity: 0.85; transition: opacity 0.2s; display: flex; align-items: center; }
   .nav-logo:hover { opacity: 1; }
   .nav-links { display: flex; gap: 32px; list-style: none; }
-  .nav-links a { font-family: var(--font-body); font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(246,245,241,0.5); text-decoration: none; transition: color 0.2s; position: relative; }
+  .nav-links a { font-family: var(--font-body); font-size: 13px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(246,245,241,0.75); text-decoration: none; transition: color 0.2s; position: relative; }
   .nav-links a::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 1px; background: var(--accent); transition: width 0.25s; }
   .nav-links a:hover { color: var(--white); }
   .nav-links a:hover::after { width: 100%; }
@@ -57,7 +57,7 @@
   .story-section { padding: 120px 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; max-width: 1440px; margin: 0 auto; }
   .story-headline { font-family: var(--font-headline); font-weight: 500; font-size: clamp(36px, 3.8vw, 54px); line-height: 1.06; letter-spacing: 0.04em; text-transform: uppercase; color: var(--navy); margin-bottom: 32px; }
   .story-headline em { font-style: normal; color: var(--accent); }
-  .story-body { font-size: 15px; font-weight: 300; line-height: 1.9; color: var(--gray-dark); }
+  .story-body { font-size: 17px; font-weight: 300; line-height: 1.9; color: var(--gray-dark); }
   .story-body p + p { margin-top: 20px; }
 
   /* FULL WIDTH IMAGE */
@@ -70,7 +70,7 @@
   .dna-inner { max-width: 1344px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
   .dna-headline { font-family: var(--font-headline); font-weight: 500; font-size: clamp(36px, 3.8vw, 54px); line-height: 1.06; letter-spacing: 0.04em; text-transform: uppercase; color: var(--white); margin-bottom: 32px; }
   .dna-headline em { font-style: normal; color: var(--accent); }
-  .dna-body { font-size: 15px; font-weight: 300; line-height: 1.9; color: rgba(246,245,241,0.6); }
+  .dna-body { font-size: 17px; font-weight: 300; line-height: 1.9; color: rgba(246,245,241,0.6); }
   .dna-body p + p { margin-top: 20px; }
   .dna-pull { font-family: var(--font-headline); font-weight: 300; font-style: italic; font-size: clamp(22px, 2.5vw, 32px); line-height: 1.35; color: var(--white); border-left: 3px solid var(--accent); padding-left: 28px; margin-bottom: 40px; }
 
@@ -81,14 +81,14 @@
   .details-img:hover img { filter: saturate(1); transform: scale(1.03); }
   .details-headline { font-family: var(--font-headline); font-weight: 500; font-size: clamp(32px, 3.2vw, 46px); line-height: 1.08; letter-spacing: 0.04em; text-transform: uppercase; color: var(--navy); margin-bottom: 28px; }
   .details-headline em { font-style: normal; color: var(--accent); }
-  .details-body { font-size: 15px; font-weight: 300; line-height: 1.9; color: var(--gray-dark); }
+  .details-body { font-size: 17px; font-weight: 300; line-height: 1.9; color: var(--gray-dark); }
   .details-body p + p { margin-top: 18px; }
 
   /* SUPPLIERS */
   .suppliers-section { background: var(--warm-white); padding: 80px 48px; border-top: 1px solid var(--gray-light); }
   .suppliers-inner { max-width: 900px; margin: 0 auto; text-align: center; }
   .suppliers-headline { font-family: var(--font-headline); font-weight: 500; font-size: 36px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--navy); margin-bottom: 28px; }
-  .suppliers-body { font-size: 15px; font-weight: 300; line-height: 1.85; color: var(--gray-dark); max-width: 680px; margin: 0 auto; }
+  .suppliers-body { font-size: 17px; font-weight: 300; line-height: 1.9; color: var(--gray-dark); max-width: 680px; margin: 0 auto; }
 
   /* NUMBERS */
   .numbers-section { background: var(--navy); padding: 80px 48px; }
@@ -106,11 +106,11 @@
   .cta-headline { font-family: var(--font-headline); font-weight: 500; font-size: clamp(32px, 3.5vw, 50px); letter-spacing: 0.04em; text-transform: uppercase; color: var(--navy); line-height: 1.08; }
   .cta-headline em { font-style: normal; color: var(--accent); }
   .cta-actions { display: flex; gap: 12px; flex-shrink: 0; }
-  .btn-primary { font-family: var(--font-body); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--white); background: var(--navy); border: 1px solid var(--navy); padding: 13px 28px; text-decoration: none; transition: all 0.25s; display: inline-flex; align-items: center; gap: 10px; }
+  .btn-primary { font-family: var(--font-body); font-size: 13px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--white); background: var(--navy); border: 1px solid var(--navy); padding: 15px 32px; text-decoration: none; transition: all 0.25s; display: inline-flex; align-items: center; gap: 10px; }
   .btn-primary:hover { background: var(--accent); border-color: var(--accent); }
   .btn-primary svg { transition: transform 0.2s; }
   .btn-primary:hover svg { transform: translateX(4px); }
-  .btn-ghost { font-family: var(--font-body); font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gray-dark); border: 1px solid var(--gray-light); padding: 13px 28px; text-decoration: none; transition: all 0.25s; }
+  .btn-ghost { font-family: var(--font-body); font-size: 13px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray-dark); border: 1px solid var(--gray-light); padding: 15px 32px; text-decoration: none; transition: all 0.25s; }
   .btn-ghost:hover { border-color: var(--navy); color: var(--navy); }
 
   /* FOOTER */
@@ -133,7 +133,7 @@
 
 <nav>
   <a href="index.html" class="nav-logo" aria-label="Arcona Yachts">
-    <svg width="40" height="40" viewBox="0 0 283.46 283.46" fill="none"><path fill="currentColor" d="M71.43,164.1c-.53.03-.78.24-1.07.63l-2.72,3.74c-1.48,1.82-2.75,2.68-3.54,2.72h-30.96c-1.12,0-1.42-.93-1.31-1.14,14.32-26.54,60.72-66.64,109.86-65.77h.03s0,0,0,0h0c.09,0,.16,0,.17,0,49.75-.87,95.95,39.7,109.58,65.35.11.2.55,1.56-.46,1.56h-31.63c-.79-.05-2.35-1.14-4.02-3.49l-2.15-2.98c-.28-.38-.69-.59-1.21-.61H71.43ZM141.51,117.66c-22.43.46-50.82,15.61-64.28,37.04-.46.65.11.73.69.69h128.35c.58.04-.15-1.12-.15-1.12-11.76-19.02-39.26-35.51-64.53-36.62h-.08Z"/></svg>
+    <svg width="72" height="72" viewBox="0 0 283.46 283.46" fill="none" style="display:block;"><path fill="#D4874A" d="M71.43,164.1c-.53.03-.78.24-1.07.63l-2.72,3.74c-1.48,1.82-2.75,2.68-3.54,2.72h-30.96c-1.12,0-1.42-.93-1.31-1.14,14.32-26.54,60.72-66.64,109.86-65.77h.03s0,0,0,0h0c.09,0,.16,0,.17,0,49.75-.87,95.95,39.7,109.58,65.35.11.2.55,1.56-.46,1.56h-31.63c-.79-.05-2.35-1.14-4.02-3.49l-2.15-2.98c-.28-.38-.69-.59-1.21-.61H71.43ZM141.51,117.66c-22.43.46-50.82,15.61-64.28,37.04-.46.65.11.73.69.69h128.35c.58.04-.15-1.12-.15-1.12-11.76-19.02-39.26-35.51-64.53-36.62h-.08Z"/></svg>
   </a>
   <ul class="nav-links">
     <li><a href="yachts.html">Yachts</a></li>
