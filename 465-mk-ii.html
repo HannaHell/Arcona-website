@@ -828,6 +828,14 @@
     #hamburger { display: flex !important; }
   }
 
+
+  @media (max-width: 768px) {
+    body { cursor: auto !important; }
+    .cursor, .cursor-ring { display: none !important; }
+    #hamburger { cursor: pointer !important; touch-action: manipulation; }
+    a, button { cursor: pointer !important; touch-action: manipulation; }
+  }
+
 </style>
 </head>
 <body>
