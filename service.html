@@ -415,20 +415,6 @@
   const observer = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.1 });
   reveals.forEach(el => observer.observe(el));
 
-);
-    mobileMenu.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => {
-        hamburger.classList.remove('open');
-        mobileMenu.classList.remove('open');
-        document.body.style.overflow = '';
-      });
-    });
-  }
-
-
-
-
-
   // Mobile menu
   const hmb = document.getElementById('hamburger');
   const mob = document.getElementById('mobileMenu');
@@ -446,7 +432,6 @@
       });
     });
   }
-
 </script>
 <!-- MOBILE MENU -->
 

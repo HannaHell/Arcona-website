@@ -378,28 +378,6 @@
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.08 });
   reveals.forEach(el => observer.observe(el));
-  function filterCards(size, btn) {
-    document.querySelectorAll('.filter-tabs button').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    const cards = document.querySelectorAll('.model-card');
-    let count = 0;
-    cards.forEach(card => { const match = size === 'all' || card.dataset.size === size; card.style.display = match ? '' : 'none'; if (match) count++; });
-    document.getElementById('modelCount').textContent = count + ' model' + (count !== 1 ? 's' : '');
-  }
-
-);
-    mobileMenu.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => {
-        hamburger.classList.remove('open');
-        mobileMenu.classList.remove('open');
-        document.body.style.overflow = '';
-      });
-    });
-  }
-
-
-
-
 
   // Mobile menu
   const hmb = document.getElementById('hamburger');
@@ -418,7 +396,6 @@
       });
     });
   }
-
 </script>
 <!-- MOBILE MENU -->
 
