@@ -20,7 +20,7 @@
   .cursor { position: fixed; width: 8px; height: 8px; background: var(--navy); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); }
   .cursor-ring { position: fixed; width: 36px; height: 36px; border: 1px solid var(--navy); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); opacity: 0.4; transition: width 0.2s, height 0.2s, opacity 0.2s; }
   .cursor-ring.expand { width: 52px; height: 52px; opacity: 0.15; }
-  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 20px 48px; background: rgba(13,28,58,0.97); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(246,245,241,0.07); }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 99997; display: flex; align-items: center; justify-content: space-between; padding: 20px 48px; background: rgba(13,28,58,0.97); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(246,245,241,0.07); }
   .nav-logo { color: var(--white); text-decoration: none; opacity: 0.85; transition: opacity 0.2s; display: flex; align-items: center; }
   .nav-logo:hover { opacity: 1; }
   .nav-links { display: flex; gap: 32px; list-style: none; }
@@ -171,8 +171,9 @@
     padding: 8px;
     flex-direction: column;
     gap: 6px;
-    z-index: 999999;
+    z-index: 99998;
     position: relative;
+    margin-left: auto;
   }
   #hamburger span {
     display: block;

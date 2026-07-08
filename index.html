@@ -20,7 +20,7 @@
   .cursor { position: fixed; width: 8px; height: 8px; background: var(--navy); border-radius: 50%; pointer-events: none; z-index: 9999; transition: transform 0.1s ease; transform: translate(-50%, -50%); }
   .cursor-ring { position: fixed; width: 36px; height: 36px; border: 1px solid var(--navy); border-radius: 50%; pointer-events: none; z-index: 9998; transition: transform 0.18s ease, width 0.2s ease, height 0.2s ease, opacity 0.2s ease; transform: translate(-50%, -50%); opacity: 0.5; }
   .cursor-ring.expand { width: 56px; height: 56px; opacity: 0.2; }
-  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 20px 48px; background: rgba(13,28,58,0.97); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(246,245,241,0.07); }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 99997; display: flex; align-items: center; justify-content: space-between; padding: 20px 48px; background: rgba(13,28,58,0.97); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(246,245,241,0.07); }
   
   .nav-logo { color: var(--white); text-decoration: none; transition: opacity 0.2s; display: flex; align-items: center; opacity: 0.85; }
   .nav-logo:hover { opacity: 1; }
@@ -177,8 +177,9 @@
     padding: 8px;
     flex-direction: column;
     gap: 6px;
-    z-index: 999999;
+    z-index: 99998;
     position: relative;
+    margin-left: auto;
   }
   #hamburger span {
     display: block;
