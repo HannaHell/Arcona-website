@@ -154,16 +154,14 @@
   /* HAMBURGER */
   #hamburger {
     display: none;
-    position: fixed;
-    top: 18px;
-    right: 20px;
-    z-index: 999999;
     background: none;
     border: none;
     cursor: pointer;
     padding: 8px;
     flex-direction: column;
     gap: 6px;
+    z-index: 999999;
+    position: relative;
   }
   #hamburger span {
     display: block;
@@ -241,6 +239,9 @@
 <!-- MOBILE MENU -->
 
 
+<button id="hamburger" aria-label="Toggle menu">
+  <span></span><span></span><span></span>
+</button>
 </nav>
 
 <!-- PAGE HEADER -->
@@ -344,6 +345,33 @@
 
 </section>
 
+
+<!-- DEALERS -->
+<section style="background:var(--warm-white); padding:80px 48px; border-top:1px solid var(--gray-light);">
+  <div style="max-width:1344px; margin:0 auto;">
+    <div style="font-family:var(--font-mono); font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--gray-mid); margin-bottom:12px; display:flex; align-items:center; gap:12px;"><span style="width:24px;height:1px;background:var(--accent);display:inline-block;"></span>Regional Representatives</div>
+    <h2 style="font-family:var(--font-headline); font-weight:500; font-size:clamp(28px,3vw,42px); letter-spacing:0.04em; text-transform:uppercase; color:var(--navy); margin-bottom:12px;">Buying from<br>outside Sweden?</h2>
+    <p style="font-family:var(--font-body); font-size:16px; font-weight:300; color:var(--gray-dark); line-height:1.8; max-width:640px; margin-bottom:48px;">Most Arcona yachts are sold directly by us in Henån. For clients based in the UK, Ireland, Switzerland and Spain we work with trusted regional representatives.</p>
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:2px;">
+      <div style="background:var(--white); padding:36px 32px;">
+        <div style="font-family:var(--font-mono); font-size:9px; letter-spacing:0.18em; text-transform:uppercase; color:var(--accent); margin-bottom:12px;">UK & Ireland</div>
+        <div style="font-family:var(--font-headline); font-weight:500; font-size:18px; text-transform:uppercase; color:var(--navy); margin-bottom:16px;">SE Yachts</div>
+        <div style="font-family:var(--font-body); font-size:14px; font-weight:300; color:var(--gray-dark); line-height:1.8;">Hamble Point Marina<br>Hamble, Southampton<br><a href="mailto:info@seyachts.com" style="color:var(--navy); text-decoration:none;">info@seyachts.com</a><br><a href="tel:+442380457770" style="color:var(--gray-mid); text-decoration:none;">+44 (0) 2380 457 770</a></div>
+      </div>
+      <div style="background:var(--white); padding:36px 32px;">
+        <div style="font-family:var(--font-mono); font-size:9px; letter-spacing:0.18em; text-transform:uppercase; color:var(--accent); margin-bottom:12px;">Switzerland</div>
+        <div style="font-family:var(--font-headline); font-weight:500; font-size:18px; text-transform:uppercase; color:var(--navy); margin-bottom:16px;">Fallenbach Werft</div>
+        <div style="font-family:var(--font-body); font-size:14px; font-weight:300; color:var(--gray-dark); line-height:1.8;">Gersauerstrasse 89<br>6440 Brunnen<br><a href="mailto:fallenbach@fwag.ch" style="color:var(--navy); text-decoration:none;">fallenbach@fwag.ch</a><br><a href="tel:+41418256555" style="color:var(--gray-mid); text-decoration:none;">+41 41 825 65 55</a></div>
+      </div>
+      <div style="background:var(--white); padding:36px 32px;">
+        <div style="font-family:var(--font-mono); font-size:9px; letter-spacing:0.18em; text-transform:uppercase; color:var(--accent); margin-bottom:12px;">Spain</div>
+        <div style="font-family:var(--font-headline); font-weight:500; font-size:18px; text-transform:uppercase; color:var(--navy); margin-bottom:16px;">Esla Yachts</div>
+        <div style="font-family:var(--font-body); font-size:14px; font-weight:300; color:var(--gray-dark); line-height:1.8;">Marina Vela, Barcelona<br>Pg. Joan de Borbó 103<br><a href="mailto:info@eslayachts.com" style="color:var(--navy); text-decoration:none;">info@eslayachts.com</a><br><a href="tel:+34627627377" style="color:var(--gray-mid); text-decoration:none;">+34 627 627 377</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- OFFICE -->
 <section class="office-section">
   <div class="office-inner">
@@ -440,8 +468,6 @@
   <a href="service.html">Service</a>
   <a href="contact.html" class="mobile-cta">Contact</a>
 </div>
-<button id="hamburger" aria-label="Toggle menu">
-  <span></span><span></span><span></span>
-</button>
+
 </body>
 </html>
