@@ -763,75 +763,7 @@
   
 
 
-  /* HAMBURGER */
-  #hamburger {
-    display: none;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 12px;
-    flex-direction: column;
-    gap: 6px;
-    z-index: 99998;
-    position: relative;
-    margin-left: auto;
-    -webkit-tap-highlight-color: transparent;
-    touch-action: manipulation;
-    min-width: 44px;
-    min-height: 44px;
-    justify-content: center;
-    align-items: center;
-  }
-  #hamburger span {
-    display: block;
-    width: 26px;
-    height: 2px;
-    background: #F6F5F1;
-    transition: all 0.25s ease;
-    border-radius: 1px;
-  }
-  #hamburger.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-  #hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-  #hamburger.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
-  #mobileMenu {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: #0D1C3A;
-    z-index: 999998;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-  }
-  #mobileMenu.open { display: flex; }
-  #mobileMenu a {
-    font-family: 'Jost', sans-serif;
-    font-weight: 300;
-    font-size: 20px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: rgba(246,245,241,0.8);
-    text-decoration: none;
-    padding: 10px 0;
-    border-bottom: 1px solid rgba(246,245,241,0.08);
-    width: 200px;
-    text-align: center;
-  }
-  #mobileMenu .mobile-cta {
-    margin-top: 16px;
-    border: 1px solid rgba(246,245,241,0.3) !important;
-    color: #F6F5F1 !important;
-    font-size: 13px !important;
-    letter-spacing: 0.14em !important;
-    padding: 12px 32px !important;
-    width: auto !important;
-  }
-  @media (max-width: 768px) {
-    #hamburger { display: flex !important; }
+  
   }
 
 
@@ -839,13 +771,50 @@
     body { cursor: auto !important; }
     .nav-cta { display: none !important; }
     .cursor, .cursor-ring { display: none !important; }
-    #hamburger { cursor: pointer !important; touch-action: manipulation; }
+  
     a, button { cursor: pointer !important; touch-action: manipulation; }
   }
 
+
+  media (max-width: 768px) {
+    
+  }
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  @media (max-width: 768px) {  }
+
+
+  .hamburger-btn { display: none; }
+  @media (max-width: 768px) {
+    body { cursor: auto !important; }
+    .cursor, .cursor-ring { display: none !important; }
+    .nav-links { display: none !important; }
+    .nav-cta { display: none !important; }
+    .hamburger-btn { display: flex !important; }
+  }
 </style>
 </head>
 <body>
+<!-- MOBILE MENU -->
+<div class="mobile-nav" id="mobileNav" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:#0D1C3A; z-index:99999; flex-direction:column; align-items:center; justify-content:center; gap:20px;">
+  <a href="yachts.html" style="font-family:'Jost',sans-serif; font-weight:300; font-size:20px; letter-spacing:0.08em; text-transform:uppercase; color:rgba(246,245,241,0.85); text-decoration:none; padding:12px 0; width:220px; text-align:center; border-bottom:1px solid rgba(246,245,241,0.08);">Yachts</a>
+  <a href="events.html" style="font-family:'Jost',sans-serif; font-weight:300; font-size:20px; letter-spacing:0.08em; text-transform:uppercase; color:rgba(246,245,241,0.85); text-decoration:none; padding:12px 0; width:220px; text-align:center; border-bottom:1px solid rgba(246,245,241,0.08);">Events</a>
+  <a href="brokerage.html" style="font-family:'Jost',sans-serif; font-weight:300; font-size:20px; letter-spacing:0.08em; text-transform:uppercase; color:rgba(246,245,241,0.85); text-decoration:none; padding:12px 0; width:220px; text-align:center; border-bottom:1px solid rgba(246,245,241,0.08);">Brokerage</a>
+  <a href="about.html" style="font-family:'Jost',sans-serif; font-weight:300; font-size:20px; letter-spacing:0.08em; text-transform:uppercase; color:rgba(246,245,241,0.85); text-decoration:none; padding:12px 0; width:220px; text-align:center; border-bottom:1px solid rgba(246,245,241,0.08);">About</a>
+  <a href="service.html" style="font-family:'Jost',sans-serif; font-weight:300; font-size:20px; letter-spacing:0.08em; text-transform:uppercase; color:rgba(246,245,241,0.85); text-decoration:none; padding:12px 0; width:220px; text-align:center; border-bottom:1px solid rgba(246,245,241,0.08);">Service</a>
+  <a href="contact.html" style="font-family:'Jost',sans-serif; font-weight:300; font-size:13px; letter-spacing:0.14em; text-transform:uppercase; color:#F6F5F1; text-decoration:none; margin-top:12px; border:1px solid rgba(246,245,241,0.3); padding:12px 32px;">Contact</a>
+</div>
 
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
@@ -870,9 +839,13 @@
 <!-- MOBILE MENU -->
 
 
-<button id="hamburger" aria-label="Toggle menu">
-  <span></span><span></span><span></span>
-</button>
+
+
+<button class="hamburger-btn" id="hamburgerBtn" aria-label="Menu" style="display:none; background:none; border:none; padding:8px; cursor:pointer; flex-direction:column; gap:6px; align-items:center; justify-content:center; -webkit-tap-highlight-color:transparent;">
+    <span style="display:block; width:24px; height:2px; background:#F6F5F1; border-radius:1px;"></span>
+    <span style="display:block; width:24px; height:2px; background:#F6F5F1; border-radius:1px;"></span>
+    <span style="display:block; width:24px; height:2px; background:#F6F5F1; border-radius:1px;"></span>
+  </button>
 </nav>
 
 <!-- BREADCRUMB -->
@@ -1514,46 +1487,29 @@
   reveals.forEach(el => observer.observe(el));
 
 
-  // Mobile menu
-  const hmb = document.getElementById('hamburger');
-  const mob = document.getElementById('mobileMenu');
-  if (hmb && mob) {
-    function toggleMenu(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      hmb.classList.toggle('open');
-      mob.classList.toggle('open');
-      document.body.style.overflow = mob.classList.contains('open') ? 'hidden' : '';
-    }
-    hmb.addEventListener('click', toggleMenu);
-    hmb.addEventListener('touchend', toggleMenu);
-    mob.querySelectorAll('a').forEach(function(a) {
-      a.addEventListener('click', function() {
-        hmb.classList.remove('open');
-        mob.classList.remove('open');
-        document.body.style.overflow = '';
-      });
-      a.addEventListener('touchend', function() {
-        hmb.classList.remove('open');
-        mob.classList.remove('open');
-        document.body.style.overflow = '';
-      });
-    });
-  }
 
+
+  
+
+  // Mobile menu
+  var mBtn = document.getElementById('hamburgerBtn');
+  var mNav = document.getElementById('mobileNav');
+  var mOpen = false;
+  function mOpenMenu() { mOpen = true; mNav.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
+  function mCloseMenu() { mOpen = false; mNav.style.display = 'none'; document.body.style.overflow = ''; }
+  if (mBtn && mNav) {
+    mBtn.addEventListener('click', function() { mOpen ? mCloseMenu() : mOpenMenu(); });
+    mNav.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', mCloseMenu); });
+  }
 </script>
 <!-- MOBILE MENU -->
 
 
 
-<div id="mobileMenu">
-  <a href="yachts.html">Yachts</a>
-  <a href="events.html">Events</a>
-  <a href="brokerage.html">Brokerage</a>
-  <a href="about.html">About</a>
-  <a href="service.html">Service</a>
-  <a href="contact.html" class="mobile-cta">Contact</a>
-</div>
+
+
+
+
 
 </body>
 </html>
