@@ -21,7 +21,6 @@
   .cursor-ring { position: fixed; width: 36px; height: 36px; border: 1px solid var(--navy); border-radius: 50%; pointer-events: none; z-index: 9998; transition: transform 0.18s ease, width 0.2s ease, height 0.2s ease, opacity 0.2s ease; transform: translate(-50%, -50%); opacity: 0.5; }
   .cursor-ring.expand { width: 56px; height: 56px; opacity: 0.2; }
   nav { position: fixed; top: 0; left: 0; right: 0; z-index: 99997; display: flex; align-items: center; justify-content: space-between; padding: 20px 48px; background: rgba(13,28,58,0.97); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(246,245,241,0.07); }
-  
   .nav-logo { color: var(--white); text-decoration: none; transition: opacity 0.2s; display: flex; align-items: center; opacity: 0.85; }
   .nav-logo:hover { opacity: 1; }
   .nav-links { display: flex; gap: 32px; list-style: none; }
@@ -31,6 +30,11 @@
   .nav-links a:hover::after { width: 100%; }
   .nav-cta { font-family: var(--font-body); font-size: 12px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--white); background: transparent; border: 1px solid rgba(246,245,241,0.35); padding: 11px 24px; text-decoration: none; transition: all 0.2s; }
   .nav-cta:hover { background: var(--accent); border-color: var(--accent); }
+  .hamburger-btn { display: none; background: none; border: none; padding: 8px; cursor: pointer; flex-direction: column; gap: 6px; align-items: center; justify-content: center; -webkit-tap-highlight-color: transparent; }
+  .hamburger-btn span { display: block; width: 24px; height: 2px; background: #F6F5F1; transition: all 0.25s; border-radius: 1px; }
+  .mobile-nav { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #0D1C3A; z-index: 99999; flex-direction: column; align-items: center; justify-content: center; gap: 20px; }
+  .mobile-nav a { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 20px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(246,245,241,0.85); text-decoration: none; padding: 12px 0; width: 220px; text-align: center; border-bottom: 1px solid rgba(246,245,241,0.08); }
+  .mobile-nav .mobile-cta-link { margin-top: 12px; border: 1px solid rgba(246,245,241,0.3) !important; border-bottom: 1px solid rgba(246,245,241,0.3) !important; font-size: 13px !important; padding: 12px 32px !important; width: auto !important; }
   .hero { height: 100vh; min-height: 700px; position: relative; z-index: 1; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; background: var(--navy); }
   .hero-bg { position: absolute; inset: 0; background: linear-gradient(170deg, rgba(13,28,58,0.55) 0%, rgba(13,28,58,0.85) 100%), url('images/50/exterior/arcona-50-drone-17-web.jpg') center/cover no-repeat; transform: scale(1.04); animation: slowzoom 14s ease-out forwards; }
   @keyframes slowzoom { from { transform: scale(1.04); } to { transform: scale(1.00); } }
@@ -85,9 +89,8 @@
   .model-size { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.2em; color: var(--accent); margin-bottom: 6px; text-transform: uppercase; }
   .model-name { font-family: var(--font-headline); font-weight: 500; font-size: 28px; color: var(--white); letter-spacing: 0.04em; text-transform: uppercase; line-height: 1.05; }
   .model-tagline { font-family: var(--font-body); font-size: 14px; font-weight: 300; color: rgba(246,245,241,0.7); margin-top: 8px; line-height: 1.5; }
-  
-  .model-specs { display: flex; gap: 16px; margin-top: 12px; opacity: 1; }
-  
+  .model-specs { display: flex; gap: 16px; margin-top: 12px; opacity: 0; transition: opacity 0.3s; }
+  .model-card:hover .model-specs { opacity: 1; }
   .model-spec { font-family: var(--font-mono); font-size: 10px; color: rgba(245,244,240,0.4); letter-spacing: 0.12em; }
   .model-spec strong { display: block; font-size: 13px; color: var(--white); font-family: var(--font-body); font-weight: 400; }
   .numbers-section { background: var(--warm-white); padding: 80px 48px; border-top: 1px solid var(--gray-light); border-bottom: 1px solid var(--gray-light); }
@@ -125,135 +128,52 @@
   .reveal.visible { opacity: 1; transform: translateY(0); }
 
   @media (max-width: 768px) {
-    .hero-title { font-size: clamp(32px, 9vw, 56px) !important; }
-    .page-title { font-size: clamp(32px, 9vw, 56px) !important; }
-    .story-headline { font-size: clamp(26px, 7vw, 40px) !important; }
-    .interior-title { font-size: clamp(26px, 7vw, 40px) !important; }
-    .cta-headline { font-size: clamp(22px, 6vw, 32px) !important; }
-    .cta-text { font-size: clamp(22px, 6vw, 32px) !important; }
-    .perf-title { font-size: clamp(24px, 6vw, 36px) !important; }
-    .related-title { font-size: clamp(24px, 6vw, 32px) !important; }
-    .models-title { font-size: clamp(28px, 8vw, 44px) !important; }
-    .intro-headline { font-size: clamp(28px, 8vw, 44px) !important; }
-    .phi-quote { font-size: clamp(20px, 6vw, 30px) !important; }
-    .listing-name { font-size: clamp(22px, 6vw, 32px) !important; }
-    .event-name { font-size: clamp(18px, 5vw, 26px) !important; }
-    .services-title { font-size: clamp(26px, 7vw, 40px) !important; }
-    .team-name { font-size: clamp(16px, 4vw, 22px) !important; }
-    nav { padding: 16px 20px !important; }
+    body { cursor: auto !important; }
+    .cursor, .cursor-ring { display: none !important; }
+    nav { padding: 14px 20px !important; }
     .nav-links { display: none !important; }
-    .nav-cta { font-size: 12px; padding: 10px 18px; }
-    .hero-content { grid-template-columns: 1fr !important; gap: 24px; padding: 0 20px 48px; }
+    .nav-cta { display: none !important; }
+    .hamburger-btn { display: flex !important; }
+    .hero-content { grid-template-columns: 1fr !important; gap: 20px; padding: 0 20px 40px; }
+    .hero-title { font-size: clamp(36px, 10vw, 60px) !important; }
     .hero-stats { flex-direction: row; gap: 16px; flex-wrap: wrap; }
-    .hero-title { font-size: clamp(44px, 11vw, 72px); }
+    .marquee-bar { display: none; }
     .section-intro { padding: 48px 20px !important; grid-template-columns: 1fr !important; gap: 24px !important; }
+    .intro-headline { font-size: clamp(28px, 8vw, 44px) !important; }
     .models-section { padding: 48px 20px !important; }
-    .models-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 2px !important; }
-    .model-specs { opacity: 1 !important; max-height: none !important; }
-    .model-tagline { max-height: none !important; margin-top: 6px !important; }
-    .model-name { font-size: 18px !important; }
+    .models-grid { grid-template-columns: repeat(2, 1fr) !important; }
+    .model-name { font-size: 16px !important; }
+    .model-tagline { font-size: 12px !important; }
+    .model-specs { opacity: 1 !important; }
     .numbers-section { padding: 40px 20px !important; }
     .numbers-grid { grid-template-columns: repeat(2, 1fr) !important; }
     .number-val { font-size: 40px !important; }
     .philosophy { padding: 48px 20px !important; grid-template-columns: 1fr !important; gap: 0 !important; }
     .phi-label { display: none !important; }
-    .phi-content { grid-template-columns: 1fr !important; gap: 32px !important; }
+    .phi-content { grid-template-columns: 1fr !important; gap: 28px !important; }
+    .phi-quote { font-size: clamp(20px, 6vw, 28px) !important; }
     .cta-band { padding: 48px 20px !important; flex-direction: column !important; align-items: flex-start !important; gap: 24px !important; }
+    .cta-text { font-size: clamp(22px, 6vw, 32px) !important; }
     footer { padding: 40px 20px 24px !important; }
     .footer-grid { grid-template-columns: 1fr 1fr !important; gap: 24px !important; }
     .footer-bottom { flex-direction: column !important; gap: 12px !important; align-items: flex-start !important; }
-    .marquee-bar { display: none; }
   }
-
-  
-
-
-  /* HAMBURGER */
-  #hamburger {
-    display: none;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 12px;
-    flex-direction: column;
-    gap: 6px;
-    z-index: 99998;
-    position: relative;
-    margin-left: auto;
-    -webkit-tap-highlight-color: transparent;
-    touch-action: manipulation;
-    min-width: 44px;
-    min-height: 44px;
-    justify-content: center;
-    align-items: center;
-  }
-  #hamburger span {
-    display: block;
-    width: 26px;
-    height: 2px;
-    background: #F6F5F1;
-    transition: all 0.25s ease;
-    border-radius: 1px;
-  }
-  #hamburger.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-  #hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-  #hamburger.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
-  #mobileMenu {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: #0D1C3A;
-    z-index: 999998;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-  }
-  #mobileMenu.open { display: flex; }
-  #mobileMenu a {
-    font-family: 'Jost', sans-serif;
-    font-weight: 300;
-    font-size: 20px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: rgba(246,245,241,0.8);
-    text-decoration: none;
-    padding: 10px 0;
-    border-bottom: 1px solid rgba(246,245,241,0.08);
-    width: 200px;
-    text-align: center;
-  }
-  #mobileMenu .mobile-cta {
-    margin-top: 16px;
-    border: 1px solid rgba(246,245,241,0.3) !important;
-    color: #F6F5F1 !important;
-    font-size: 13px !important;
-    letter-spacing: 0.14em !important;
-    padding: 12px 32px !important;
-    width: auto !important;
-  }
-  @media (max-width: 768px) {
-    #hamburger { display: flex !important; }
-  }
-
-
-  @media (max-width: 768px) {
-    body { cursor: auto !important; }
-    .nav-cta { display: none !important; }
-    .cursor, .cursor-ring { display: none !important; }
-    #hamburger { cursor: pointer !important; touch-action: manipulation; }
-    a, button { cursor: pointer !important; touch-action: manipulation; }
-  }
-
 </style>
 </head>
 <body>
 
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
+
+<!-- MOBILE MENU -->
+<div class="mobile-nav" id="mobileNav">
+  <a href="yachts.html">Yachts</a>
+  <a href="events.html">Events</a>
+  <a href="brokerage.html">Brokerage</a>
+  <a href="about.html">About</a>
+  <a href="service.html">Service</a>
+  <a href="contact.html" class="mobile-cta-link">Contact</a>
+</div>
 
 <nav id="mainNav">
   <a href="index.html" class="nav-logo" aria-label="Arcona Yachts">
@@ -268,13 +188,9 @@
     <li><a href="service.html">Service</a></li>
   </ul>
   <a href="contact.html" class="nav-cta">Contact</a>
-
-<!-- MOBILE MENU -->
-
-
-<button id="hamburger" aria-label="Toggle menu">
-  <span></span><span></span><span></span>
-</button>
+  <button class="hamburger-btn" id="hamburgerBtn" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
 <section class="hero">
@@ -338,79 +254,13 @@
     </div>
     <a href="yachts.html" class="models-link">View All Models <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M1 8h14M9 2l6 6-6 6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
   </div>
-    <div class="models-grid reveal">
-    <a href="arcona-50.html" class="model-card">
-      <img class="model-img" src="images/50/exterior/arcona-50-drone-17-web.jpg" alt="Arcona 50" loading="lazy">
-      <div class="model-overlay">
-        <div class="model-size">50 ft — Flagship</div>
-        <div class="model-name">Arcona 50</div>
-        <div class="model-tagline">Built for long passages, and longer evenings.</div>
-        <div class="model-specs">
-          <div class="model-spec"><strong>15.80m</strong>LOA</div>
-          <div class="model-spec"><strong>4.60m</strong>Beam</div>
-        </div>
-      </div>
-    </a>
-    <a href="465-mk-ii.html" class="model-card">
-      <img class="model-img" src="images/465/exterior/Arcona_465_open_dark_Gray_update_3_2507070003.jpg" alt="Arcona 465 Mk II" loading="lazy">
-      <div class="model-overlay">
-        <div class="model-size">46.5 ft — New</div>
-        <div class="model-name">Arcona 465 Mk II</div>
-        <div class="model-tagline">A legend, redefined.</div>
-        <div class="model-specs">
-          <div class="model-spec"><strong>14.09m</strong>LOA</div>
-          <div class="model-spec"><strong>4.24m</strong>Beam</div>
-        </div>
-      </div>
-    </a>
-    <a href="435-mk-ii.html" class="model-card">
-      <img class="model-img" src="images/435/exterior/Arcona-435-6795-edited.jpg" alt="Arcona 435 Mk II" loading="lazy">
-      <div class="model-overlay">
-        <div class="model-size">43.5 ft</div>
-        <div class="model-name">Arcona 435 Mk II</div>
-        <div class="model-tagline">Where racing DNA meets cruising soul.</div>
-        <div class="model-specs">
-          <div class="model-spec"><strong>13.25m</strong>LOA</div>
-          <div class="model-spec"><strong>4.30m</strong>Beam</div>
-        </div>
-      </div>
-    </a>
-    <a href="arcona-415.html" class="model-card">
-      <img class="model-img" src="images/415/exterior/arcona-415-2334_e_best_best-e1666255634921.jpg" alt="Arcona 415" loading="lazy">
-      <div class="model-overlay">
-        <div class="model-size">41.5 ft</div>
-        <div class="model-name">Arcona 415</div>
-        <div class="model-tagline">Beautiful lines. Serious performance.</div>
-        <div class="model-specs">
-          <div class="model-spec"><strong>12.91m</strong>LOA</div>
-          <div class="model-spec"><strong>3.90m</strong>Beam</div>
-        </div>
-      </div>
-    </a>
-    <a href="arcona-385.html" class="model-card">
-      <img class="model-img" src="images/385/exterior/trygg_arcona_jungfru_apr_21_375.jpg" alt="Arcona 385" loading="lazy">
-      <div class="model-overlay">
-        <div class="model-size">38.5 ft</div>
-        <div class="model-name">Arcona 385</div>
-        <div class="model-tagline">Relaxing to cruise. Thrilling to sail.</div>
-        <div class="model-specs">
-          <div class="model-spec"><strong>11.30m</strong>LOA</div>
-          <div class="model-spec"><strong>3.80m</strong>Beam</div>
-        </div>
-      </div>
-    </a>
-    <a href="arcona-345.html" class="model-card">
-      <img class="model-img" src="images/345/exterior/Arcona_345_up_DSC_0581.JPG" alt="Arcona 345" loading="lazy">
-      <div class="model-overlay">
-        <div class="model-size">34.5 ft</div>
-        <div class="model-name">Arcona 345</div>
-        <div class="model-tagline">Nothing entry-level about the way she sails.</div>
-        <div class="model-specs">
-          <div class="model-spec"><strong>10.40m</strong>LOA</div>
-          <div class="model-spec"><strong>3.45m</strong>Beam</div>
-        </div>
-      </div>
-    </a>
+  <div class="models-grid reveal">
+    <a href="arcona-50.html" class="model-card"><img class="model-img" src="images/50/exterior/arcona-50-drone-17-web.jpg" alt="Arcona 50" loading="lazy"><div class="model-overlay"><div class="model-size">50 ft — Flagship</div><div class="model-name">Arcona 50</div><div class="model-tagline">Built for long passages, and longer evenings.</div><div class="model-specs"><div class="model-spec"><strong>15.80m</strong>LOA</div><div class="model-spec"><strong>4.60m</strong>Beam</div></div></div></a>
+    <a href="465-mk-ii.html" class="model-card"><img class="model-img" src="images/465/exterior/Arcona_465_open_dark_Gray_update_3_2507070003.jpg" alt="Arcona 465 Mk II" loading="lazy"><div class="model-overlay"><div class="model-size">46.5 ft — New</div><div class="model-name">Arcona 465 Mk II</div><div class="model-tagline">A legend, redefined.</div><div class="model-specs"><div class="model-spec"><strong>14.09m</strong>LOA</div><div class="model-spec"><strong>4.24m</strong>Beam</div></div></div></a>
+    <a href="435-mk-ii.html" class="model-card"><img class="model-img" src="images/435/exterior/Arcona-435-6795-edited.jpg" alt="Arcona 435 Mk II" loading="lazy"><div class="model-overlay"><div class="model-size">43.5 ft</div><div class="model-name">Arcona 435 Mk II</div><div class="model-tagline">Where racing DNA meets cruising soul.</div><div class="model-specs"><div class="model-spec"><strong>13.25m</strong>LOA</div><div class="model-spec"><strong>4.30m</strong>Beam</div></div></div></a>
+    <a href="arcona-415.html" class="model-card"><img class="model-img" src="images/415/exterior/arcona-415-2334_e_best_best-e1666255634921.jpg" alt="Arcona 415" loading="lazy"><div class="model-overlay"><div class="model-size">41.5 ft</div><div class="model-name">Arcona 415</div><div class="model-tagline">Beautiful lines. Serious performance.</div><div class="model-specs"><div class="model-spec"><strong>12.91m</strong>LOA</div><div class="model-spec"><strong>3.90m</strong>Beam</div></div></div></a>
+    <a href="arcona-385.html" class="model-card"><img class="model-img" src="images/385/exterior/trygg_arcona_jungfru_apr_21_375.jpg" alt="Arcona 385" loading="lazy"><div class="model-overlay"><div class="model-size">38.5 ft</div><div class="model-name">Arcona 385</div><div class="model-tagline">Relaxing to cruise. Thrilling to sail.</div><div class="model-specs"><div class="model-spec"><strong>11.30m</strong>LOA</div><div class="model-spec"><strong>3.80m</strong>Beam</div></div></div></a>
+    <a href="arcona-345.html" class="model-card"><img class="model-img" src="images/345/exterior/Arcona_345_up_DSC_0581.JPG" alt="Arcona 345" loading="lazy"><div class="model-overlay"><div class="model-size">34.5 ft</div><div class="model-name">Arcona 345</div><div class="model-tagline">Nothing entry-level about the way she sails.</div><div class="model-specs"><div class="model-spec"><strong>10.40m</strong>LOA</div><div class="model-spec"><strong>3.45m</strong>Beam</div></div></div></a>
   </div>
 </section>
 
@@ -497,52 +347,20 @@
   function animateRing() { rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12; ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; requestAnimationFrame(animateRing); }
   animateRing();
   document.querySelectorAll('a, button').forEach(el => { el.addEventListener('mouseenter', () => ring.classList.add('expand')); el.addEventListener('mouseleave', () => ring.classList.remove('expand')); });
-
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.12 });
   reveals.forEach(el => observer.observe(el));
 
-
   // Mobile menu
-  const hmb = document.getElementById('hamburger');
-  const mob = document.getElementById('mobileMenu');
-  if (hmb && mob) {
-    function toggleMenu(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      hmb.classList.toggle('open');
-      mob.classList.toggle('open');
-      document.body.style.overflow = mob.classList.contains('open') ? 'hidden' : '';
-    }
-    hmb.addEventListener('click', toggleMenu);
-    hmb.addEventListener('touchend', toggleMenu);
-    mob.querySelectorAll('a').forEach(function(a) {
-      a.addEventListener('click', function() {
-        hmb.classList.remove('open');
-        mob.classList.remove('open');
-        document.body.style.overflow = '';
-      });
-      a.addEventListener('touchend', function() {
-        hmb.classList.remove('open');
-        mob.classList.remove('open');
-        document.body.style.overflow = '';
-      });
-    });
+  var btn = document.getElementById('hamburgerBtn');
+  var nav = document.getElementById('mobileNav');
+  var isOpen = false;
+  function openMenu() { isOpen = true; nav.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
+  function closeMenu() { isOpen = false; nav.style.display = 'none'; document.body.style.overflow = ''; }
+  if (btn && nav) {
+    btn.addEventListener('click', function() { isOpen ? closeMenu() : openMenu(); });
+    nav.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', closeMenu); });
   }
-
 </script>
-<!-- MOBILE MENU -->
-
-
-
-<div id="mobileMenu">
-  <a href="yachts.html">Yachts</a>
-  <a href="events.html">Events</a>
-  <a href="brokerage.html">Brokerage</a>
-  <a href="about.html">About</a>
-  <a href="service.html">Service</a>
-  <a href="contact.html" class="mobile-cta">Contact</a>
-</div>
-
 </body>
 </html>
