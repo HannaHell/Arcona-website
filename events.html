@@ -168,12 +168,18 @@
     background: none;
     border: none;
     cursor: pointer;
-    padding: 8px;
+    padding: 12px;
     flex-direction: column;
     gap: 6px;
     z-index: 99998;
     position: relative;
     margin-left: auto;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    min-width: 44px;
+    min-height: 44px;
+    justify-content: center;
+    align-items: center;
   }
   #hamburger span {
     display: block;
@@ -230,6 +236,7 @@
 
   @media (max-width: 768px) {
     body { cursor: auto !important; }
+    .nav-cta { display: none !important; }
     .cursor, .cursor-ring { display: none !important; }
     #hamburger { cursor: pointer !important; touch-action: manipulation; }
     a, button { cursor: pointer !important; touch-action: manipulation; }
@@ -402,23 +409,34 @@
   const observer = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.1 });
   reveals.forEach(el => observer.observe(el));
 
+
   // Mobile menu
   const hmb = document.getElementById('hamburger');
   const mob = document.getElementById('mobileMenu');
   if (hmb && mob) {
-    hmb.addEventListener('click', function() {
+    function toggleMenu(e) {
+      e.preventDefault();
+      e.stopPropagation();
       hmb.classList.toggle('open');
       mob.classList.toggle('open');
       document.body.style.overflow = mob.classList.contains('open') ? 'hidden' : '';
-    });
+    }
+    hmb.addEventListener('click', toggleMenu);
+    hmb.addEventListener('touchend', toggleMenu);
     mob.querySelectorAll('a').forEach(function(a) {
       a.addEventListener('click', function() {
         hmb.classList.remove('open');
         mob.classList.remove('open');
         document.body.style.overflow = '';
       });
+      a.addEventListener('touchend', function() {
+        hmb.classList.remove('open');
+        mob.classList.remove('open');
+        document.body.style.overflow = '';
+      });
     });
   }
+
 </script>
 <!-- MOBILE MENU -->
 
